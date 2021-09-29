@@ -14,7 +14,7 @@ Menu::Menu(float width, float height) {
 	boton[0].setString("Nueva partida");
 	boton[0].setPosition(Vector2f((width/2) - 150, height / 5 * 1));
 	boton[0].setCharacterSize(40);
-
+	
 	boton[1].setFont(fuente);
 	boton[1].setFillColor(Color::White);
 	boton[1].setString("Cargar Partida");

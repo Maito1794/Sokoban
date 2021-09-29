@@ -10,7 +10,7 @@ private:
 	Text responsable3;
 
 public: 
-	Credito();
+	Credito(float width, float height);
 	void mostrarCreditos(RenderWindow& window);
 
 };

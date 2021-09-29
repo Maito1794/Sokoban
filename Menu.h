@@ -8,6 +8,7 @@ private:
 	Event e;
 	Font fuente;
 	Text boton[4];
+	bool cerrar;
 	int botonSeleccionado;
 
 public:
@@ -16,7 +17,7 @@ public:
 	void dibujarBoton(RenderWindow& window);
 	void teclaArriba();
 	void teclaAbajo();
-	void teclaEnter();
 	int getbotonPresionado() { return botonSeleccionado; }
+	void cargarMenu(RenderWindow& window);
 
 };

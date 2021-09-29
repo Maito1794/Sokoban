@@ -1,45 +1,33 @@
 #include <iostream>
 #include "Menu.h"
+#include "Tablero.h"
 #include <SFML/Graphics.hpp>
 #include "main.h"
 
 using namespace sf;
 
 int main(){
-	bool contador[4] = { false,false,false,false };
 	RenderWindow window(VideoMode(750, 500), "Sokoban",Style::Close);
 	
 	Menu menu(window.getSize().x, window.getSize().y);
 
 	while (window.isOpen()) {
-		sf::Event event;
 
-		while (window.pollEvent(event)) {
-			switch (event.type){
-				 
-			case sf::Event::KeyReleased:
-				switch (event.key.code) {
-				case sf::Keyboard::Up:
-					menu.teclaArriba();
-					break;
+		menu.cargarMenu(window);
 
-				case sf::Keyboard::Down:
-					menu.teclaAbajo();
-					break;
+		switch (menu.getbotonPresionado()) {
+		case 0:
 
-				case sf::Event::Closed:
-					window.close();
-					break;
-				case Keyboard::Enter:
-					menu.teclaEnter();
-				}
-			}
-
-			window.clear();
-			menu.dibujarBoton(window);
-			window.display();
-
-		}
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			window.close();
+			break;
+		}		
 	}
+
     return 0;
 }

@@ -61,18 +61,40 @@ void Menu::teclaAbajo()
 	}
 }
 
-void Menu::teclaEnter()
+void Menu::cargarMenu(RenderWindow& window)
 {
-	switch (botonSeleccionado) {
-	case 0:
-		break;
-	case 1:
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	case 4:
-		break;
+	cerrar = false;
+	while (!cerrar) {
+		sf::Event event;
+
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case sf::Keyboard::Up:
+					teclaArriba();
+					break;
+
+				case sf::Keyboard::Down:
+					teclaAbajo();
+					break;
+
+				case Keyboard::Enter:
+					cerrar = true;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
+				cerrar = true;
+				window.close();
+				break;
+			}
+
+			window.clear();
+			dibujarBoton(window);
+			window.display();
+
+		}
 	}
 }

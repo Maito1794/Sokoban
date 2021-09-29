@@ -161,6 +161,7 @@
     <ClCompile Include="Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Tablero.h" />
   </ItemGroup>

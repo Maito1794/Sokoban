@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Menu.h"
 #include <SFML/Graphics.hpp>
+#include "main.h"
 
 using namespace sf;
 
@@ -29,6 +30,8 @@ int main(){
 				case sf::Event::Closed:
 					window.close();
 					break;
+				case Keyboard::Enter:
+					menu.teclaEnter();
 				}
 			}
 

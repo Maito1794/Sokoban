@@ -16,6 +16,7 @@ public:
 	void dibujarBoton(RenderWindow& window);
 	void teclaArriba();
 	void teclaAbajo();
+	void teclaEnter();
 	int getbotonPresionado() { return botonSeleccionado; }
 
 };

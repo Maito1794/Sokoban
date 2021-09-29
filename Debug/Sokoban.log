@@ -1,0 +1,15 @@
+﻿  Menu.cpp
+  main.cpp
+D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto\Sokoban\main.cpp(11,48): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto\Sokoban\main.cpp(11,28): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+  Tablero.cpp
+  Generando código...
+  Sokoban.vcxproj -> D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto\Sokoban\Debug\Sokoban.exe

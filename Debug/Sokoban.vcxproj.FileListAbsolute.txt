@@ -1,0 +1,3 @@
+D:\Users\hp\Documents\UNA\Ciclo 2021\II Semestre\Estructuras de Datos\Proyecto\Sokoban\Sokoban\Debug\Sokoban.exe
+D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto 1\Sokoban\Debug\Sokoban.exe
+D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto\Sokoban\Debug\Sokoban.exe

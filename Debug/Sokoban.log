@@ -1,2 +1,4 @@
-﻿  Credito.cpp
-  Sokoban.vcxproj -> D:\Users\hp\Documents\UNA\Ciclo 2021\II Semestre\Estructuras de Datos\Proyect\Sokoban\Debug\Sokoban.exe
+﻿  Tablero.cpp
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Tablero.cpp(34,20): warning C4018: '<': no coinciden signed/unsigned
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Tablero.cpp(27,7): warning C4101: 'p': variable local sin referencia
+  Sokoban.vcxproj -> D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Debug\Sokoban.exe

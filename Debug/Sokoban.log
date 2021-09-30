@@ -1,4 +1,25 @@
-﻿  Tablero.cpp
-D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Tablero.cpp(34,20): warning C4018: '<': no coinciden signed/unsigned
-D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Tablero.cpp(27,7): warning C4101: 'p': variable local sin referencia
+﻿  Credito.cpp
+  main.cpp
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\main.cpp(14,48): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\main.cpp(14,28): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\main.cpp(15,54): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\main.cpp(15,34): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+          with
+          [
+              T=unsigned int
+          ]
+  Generando código...
+  LINK : no se encontró D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Debug\Sokoban.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   Sokoban.vcxproj -> D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Debug\Sokoban.exe

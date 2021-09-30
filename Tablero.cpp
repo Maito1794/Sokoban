@@ -20,7 +20,7 @@ void Tablero::leerArchivo() {
 	inFile.open("ejemplo.txt");
 
 	if (!inFile) {
-		cout << "ocurrio un error abriendo el men";
+		cout << "Ocurrio un error abriendo el archivo";
 	}
 	string line;
 	string texto;

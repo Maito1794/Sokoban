@@ -162,6 +162,7 @@
     <ClCompile Include="Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CargarPartida.h" />
     <ClInclude Include="Credito.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Menu.h" />

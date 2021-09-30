@@ -18,7 +18,6 @@ int main(){
 	tablero.leerArchivo();
 	tablero.crearMatriz();
 	tablero.mostrarMatriz();
-	cout << "Prueba";
 
 	while (window.isOpen()) {
 

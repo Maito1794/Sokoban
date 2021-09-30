@@ -1,6 +1,6 @@
 #Folders
-.vs\
-Debug\
+.vs/
+Debug/
 
 # Prerequisites
 *.d

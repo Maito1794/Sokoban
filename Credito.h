@@ -5,12 +5,15 @@ using namespace sf;
 
 class Credito {
 private:
-	Text responsable1;
-	Text responsable2;
-	Text responsable3;
+	Text responsables;
+	Text titulo;
+	Text descripcion;
+	Text salir;
+	Font fuente;
+	Texture gif;
+	Sprite sprite;
 
 public: 
 	Credito(float width, float height);
 	void mostrarCreditos(RenderWindow& window);
-
 };

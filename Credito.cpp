@@ -4,14 +4,38 @@
 
 
 Credito::Credito(float width, float height) {
-	//Font font;
-	//font.loadFromFile("Letra_Pixel.ttf");
-	//responsable1.setFont(font);
-	responsable1.setFillColor(Color::Green);
-	responsable1.setString("Mauricio Mora Brenes");
-	responsable1.setPosition(width/2, height/2);
-	responsable1.setCharacterSize(40);
-	//responsable2.setString("")
+	fuente.loadFromFile("Letra_Pixel.ttf");
+
+	titulo.setFont(fuente);
+	titulo.setFillColor(Color::Blue);
+	titulo.setString("SOKOBAN");
+	titulo.setPosition(10, 0);
+	titulo.setCharacterSize(60);
+
+
+	descripcion.setFont(fuente);
+	descripcion.setFillColor(Color::Blue);
+	descripcion.setString("Este juego fue elaborado por:");
+	descripcion.setPosition(10, 65);
+	descripcion.setCharacterSize(35);
+
+	responsables.setFont(fuente);
+	responsables.setFillColor(Color::White);
+	responsables.setString("Mauricio Mora Brenes\n\nHeizel Arias Alvarado\n\nJulián Ramírez Solís");
+	responsables.setPosition((width/2)-200, (height/2)-100);
+	responsables.setCharacterSize(35);
+	
+	salir.setFont(fuente);
+	salir.setFillColor(Color::White);
+	salir.setString("Presione ENTER para volver al menú principal.");
+	salir.setPosition(0, (height / 2) - (-205));
+	salir.setCharacterSize(20);
+
+	gif.loadFromFile("animacionCreditos.gif");
+	sprite.setTexture(gif);
+	sprite.setTextureRect(sf::IntRect(10, 10, 50, 30));
+	sprite.setColor(sf::Color(255, 255, 255, 200));
+	sprite.setPosition((width / 2) - 200, (height / 2) - 300);
 }
 
 void Credito::mostrarCreditos(RenderWindow& window) {
@@ -37,7 +61,11 @@ void Credito::mostrarCreditos(RenderWindow& window) {
 				break;
 			}
 			window.clear();
-			window.draw(responsable1);
+			window.draw(titulo);
+			window.draw(descripcion);
+			window.draw(responsables);
+			window.draw(salir);
+			window.draw(sprite);
 			window.display();
 		}
 		

@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "main.h"
 
+using namespace std;
 using namespace sf;
 
 int main(){
@@ -17,7 +18,7 @@ int main(){
 	tablero.leerArchivo();
 	tablero.crearMatriz();
 	tablero.mostrarMatriz();
-
+	cout << "Prueba";
 
 	while (window.isOpen()) {
 

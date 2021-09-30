@@ -8,10 +8,16 @@
 using namespace sf;
 
 int main(){
+
 	RenderWindow window(VideoMode(750, 500), "Sokoban",Style::Close);
 	
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
+	Tablero tablero;
+	tablero.leerArchivo();
+	tablero.crearMatriz();
+	tablero.mostrarMatriz();
+
 
 	while (window.isOpen()) {
 

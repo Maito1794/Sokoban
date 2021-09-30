@@ -1,6 +1,8 @@
-﻿  Menu.cpp
-D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto 1\Sokoban\Menu.h(2,10): fatal error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+﻿  Credito.cpp
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Credito.cpp(1,10): fatal error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Menu.cpp
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Menu.h(2,10): fatal error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
   main.cpp
-D:\Maito\Documents\Universidad\2021\Semestre 2\Estructuras\Proyecto 1\Sokoban\Menu.h(2,10): fatal error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+D:\Estructuras de Datos\ProyectoSokoban\Sokoban\Menu.h(2,10): fatal error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
   Tablero.cpp
   Generando código...

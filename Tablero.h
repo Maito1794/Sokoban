@@ -19,7 +19,6 @@ struct nodo {
 
 
 
-
 class Tablero {
 
 private:
@@ -28,7 +27,9 @@ private:
 	int cont = 0;
 	nodo* p, * q, * r;
 	FILE* archivo;
-
+	Texture fondoTablero;
+	Sprite cargarFondoTablero;
+	Image imagen;
 
 public:
 	void leerArchivo();

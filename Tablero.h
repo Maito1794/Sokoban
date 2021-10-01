@@ -29,11 +29,17 @@ private:
 	nodo* p, * q, * r;
 	FILE* archivo;
 
+	Text titulo;
+	Font fuente;
+
 
 public:
 	void leerArchivo();
 	void crearMatriz();
 	void mostrarMatriz();
+
+	Tablero(float width, float height);
+	void mostrarTablero(RenderWindow& window);
 
 
 };

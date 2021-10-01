@@ -14,7 +14,7 @@ int main(){
 	
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
-	Tablero tablero;
+	Tablero tablero(window.getSize().x, window.getSize().y);
 	tablero.leerArchivo();
 	tablero.crearMatriz();
 	tablero.mostrarMatriz();
@@ -25,7 +25,7 @@ int main(){
 
 		switch (menu.getbotonPresionado()) {
 		case 0:
-
+			tablero.mostrarTablero(window);
 			break;
 		case 1:
 			break;

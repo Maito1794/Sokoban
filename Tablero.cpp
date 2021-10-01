@@ -1,10 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-#include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include "Tablero.h"
 
 using namespace std;
@@ -107,4 +105,43 @@ void Tablero::mostrarMatriz() {
 		std::cout << "lista vacia...\n";
 	}
 
+}
+
+Tablero::Tablero(float width, float height) {
+	fuente.loadFromFile("Letra_Pixel.ttf");
+	titulo.setFont(fuente);
+	titulo.setFillColor(Color::Blue);
+	titulo.setString("SOKOBAN");
+	titulo.setPosition(10, 0);
+	titulo.setCharacterSize(60);
+}
+
+void Tablero::mostrarTablero(RenderWindow& window) {
+	bool cerrar = false;
+
+	while (!cerrar) {
+
+		sf::Event event;
+
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case Keyboard::Enter:
+					cerrar = true;
+					break;
+				}
+				break;
+			case sf::Event::Closed:
+				cerrar = true;
+				window.close();
+				break;
+			}
+			window.clear();
+			window.draw(titulo);
+			window.display();
+		}
+
+	}
 }

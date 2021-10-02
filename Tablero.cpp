@@ -163,7 +163,7 @@ void Tablero::cargarNiveles(int nivel) {
 	}
 	
 	crearMatriz();
-	mostrarMatriz();
+	//mostrarMatriz();
 	cargarFondoTablero.setTexture(fondoTablero);
 	cargarFondoTablero.setPosition(20, 20);
 }
@@ -173,10 +173,9 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
 	cargarNiveles(nivel);
-<<<<<<< HEAD
+
 	crearMatriz();
-=======
->>>>>>> 94265ee07b6184d97951896a6ac2478542fe8002
+
 	
 	while (!cerrar) {
 

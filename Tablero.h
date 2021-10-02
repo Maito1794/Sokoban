@@ -23,19 +23,19 @@ class Tablero {
 private:
 	nodo* head = NULL;
 	char cadena[100];
-	//int cont = 0;
-	//nodo* p, * q, * r;
 	FILE* archivo;
 	Text titulo;
 	Font fuente;
 	Texture fondoTablero;
+	Texture cajas;
 	Sprite cargarFondoTablero;
+	Sprite cargarCajas;
 	Image imagen;
 
 public:
 	void leerArchivo(string archivo);
 	void crearMatriz();
-	void mostrarMatriz();
+	void mostrarMatriz(RenderWindow& window1);
 	Tablero(float width, float height);
 	void mostrarTablero(RenderWindow& window, int nivel);
 	void validaciones(nodo *n);

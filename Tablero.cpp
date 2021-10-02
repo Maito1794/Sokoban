@@ -40,8 +40,9 @@ void Tablero::leerArchivo(string archivo) {
 	cout << "\n";
 }
 void Tablero::crearMatriz() {
+	head = NULL;
 	nodo *p = NULL, *q = NULL, *r = NULL;
-	cont = 0;
+	int cont = 0;
 
 	for (int i = 1; i < 11; i++) {
 		for (int j = 1; j < 11; j++) {
@@ -106,7 +107,7 @@ void Tablero::mostrarMatriz() {
 	else {
 		cout << "lista vacia...\n";
 	}
-
+	
 }
 
 Tablero::Tablero(float width, float height) {
@@ -149,7 +150,7 @@ void Tablero::cargarNiveles(int nivel) {
 	default:
 		break;
 	}
-	crearMatriz();
+	
 	
 
 	cargarFondoTablero.setTexture(fondoTablero);
@@ -161,6 +162,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
 	cargarNiveles(nivel);
+	crearMatriz();
 	mostrarMatriz();
 	while (!cerrar) {
 

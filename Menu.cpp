@@ -4,6 +4,7 @@
 #include <SFML/Window.hpp>
 
 using namespace sf;
+using namespace std;
 
 Menu::Menu(float width, float height) {
 

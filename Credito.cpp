@@ -28,14 +28,9 @@ Credito::Credito(float width, float height) {
 	salir.setFont(fuente);
 	salir.setFillColor(Color::White);
 	salir.setString("Presione ENTER para volver al menú principal.");
-	salir.setPosition(0, (height / 2) - (-205));
+	salir.setPosition(10, height-50);
 	salir.setCharacterSize(20);
 
-	gif.loadFromFile("animacionCreditos.gif");
-	sprite.setTexture(gif);
-	sprite.setTextureRect(sf::IntRect(10, 10, 50, 30));
-	sprite.setColor(sf::Color(255, 255, 255, 200));
-	sprite.setPosition((width / 2) - 200, (height / 2) - 300);
 }
 
 void Credito::mostrarCreditos(RenderWindow& window) {
@@ -65,7 +60,6 @@ void Credito::mostrarCreditos(RenderWindow& window) {
 			window.draw(descripcion);
 			window.draw(responsables);
 			window.draw(salir);
-			window.draw(sprite);
 			window.display();
 		}
 		

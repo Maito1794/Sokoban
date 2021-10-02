@@ -41,6 +41,40 @@ void Menu::dibujarBoton(RenderWindow& window)
 	for (int i = 0; i < 4; i++) {
 		window.draw(boton[i]);
 	}
+	caja_gris.loadFromFile("resources/sprite/caja_gris.png");
+	caja.setTexture(caja_gris);
+	Color color1(61, 110, 255);
+	Color color2(58, 207, 97);
+	Color color3(204, 91, 57);
+	for (int i = 0; i < 6; i++) {
+		switch (i) {
+		case 0:
+			caja.setColor(color1);
+			caja.setPosition(20, window.getSize().y - 80);
+			break;
+		case 1:
+			caja.setColor(color2);
+			caja.setPosition(84, window.getSize().y - 80);
+			break;
+		case 2:
+			caja.setPosition(20, window.getSize().y - 144);
+			caja.setColor(color3);
+			break;
+		case 3:
+			caja.setColor(color1);
+			caja.setPosition(window.getSize().x-80,20);
+			break;
+		case 4:
+			caja.setColor(color3);
+			caja.setPosition(window.getSize().x - 80, 84);
+			break;
+		case 5:
+			caja.setPosition(window.getSize().x - 144, 20);
+			caja.setColor(color2);
+			break;
+		}
+		window.draw(caja);
+	}
 }
 
 void Menu::teclaArriba()

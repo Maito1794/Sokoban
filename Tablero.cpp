@@ -3,11 +3,12 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "Tablero.h"
 
 using namespace std;
 
-void Tablero::leerArchivo() {
+void Tablero::leerArchivo(string archivo) {
 
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
@@ -15,7 +16,7 @@ void Tablero::leerArchivo() {
 
 	int cont = 0;
 	ifstream inFile;
-	inFile.open("ejemplo.txt");
+	inFile.open(archivo);
 
 	if (!inFile) {
 		cout << "Ocurrio un error abriendo el archivo";
@@ -107,6 +108,14 @@ void Tablero::mostrarMatriz() {
 
 }
 
+void Tablero::validaciones(nodo *n) {
+
+}
+
+void Tablero::jugar() {
+
+}
+
 Tablero::Tablero(float width, float height) {
 	fuente.loadFromFile("Letra_Pixel.ttf");
 	titulo.setFont(fuente);
@@ -116,7 +125,7 @@ Tablero::Tablero(float width, float height) {
 	titulo.setCharacterSize(60);
 }
 
-void Tablero::mostrarTablero(RenderWindow& window) {
+void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
 	while (!cerrar) {

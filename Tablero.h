@@ -1,7 +1,5 @@
 #pragma once
 #include <iostream>
-#include <cstdlib>
-#include <cstdio>
 #include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
@@ -34,11 +32,12 @@ private:
 	Image imagen;
 
 public:
-	void leerArchivo();
+	void leerArchivo(string archivo);
 	void crearMatriz();
 	void mostrarMatriz();
 	Tablero(float width, float height);
-   void mostrarTablero(RenderWindow& window);
-
+	void mostrarTablero(RenderWindow& window, int nivel);
+	void validaciones(nodo *n);
+	void jugar();
 
 };

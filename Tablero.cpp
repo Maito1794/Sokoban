@@ -151,8 +151,8 @@ void Tablero::cargarNiveles(int nivel) {
 		break;
 	}
 	
-	
-
+	crearMatriz();
+	mostrarMatriz();
 	cargarFondoTablero.setTexture(fondoTablero);
 	cargarFondoTablero.setPosition(20, 20);
 }
@@ -162,8 +162,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
 	cargarNiveles(nivel);
-	crearMatriz();
-	mostrarMatriz();
+	
 	while (!cerrar) {
 
 		sf::Event event;

@@ -23,8 +23,6 @@ class Tablero {
 private:
 	nodo* head = NULL;
 	char cadena[100];
-	//int cont = 0;
-	//nodo* p, * q, * r;
 	FILE* archivo;
 	Text titulo;
 	Font fuente;

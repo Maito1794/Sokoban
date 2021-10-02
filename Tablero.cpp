@@ -87,10 +87,8 @@ void Tablero::crearMatriz() {
 
 }
 
-void Tablero::mostrarMatriz(RenderWindow& window1) {
-	
+void Tablero::mostrarMatriz() {
 	nodo* p = NULL, * q = NULL;
-	int x = 25, y = 25; 
 	if (head != NULL) {
 		p = head;
 		// se recorre las filas
@@ -99,15 +97,6 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 			// se recorren columnas
 			while (q != NULL) {
 				cout << q->dato << "  ";
-				if (q->dato == 35) {
-
-					cajas.loadFromFile("resources/sprite/caja_roja.png");
-					cargarCajas.setTexture(cajas);
-					cargarCajas.setPosition(x, y);
-					window1.draw(cargarCajas);
-					x += 64;
-					//y += 46;
-				}
 				q = q->sig;
 			}
 			cout << "\n";
@@ -173,10 +162,6 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
 	cargarNiveles(nivel);
-<<<<<<< HEAD
-	crearMatriz();
-=======
->>>>>>> 94265ee07b6184d97951896a6ac2478542fe8002
 	
 	while (!cerrar) {
 
@@ -200,12 +185,8 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			window.clear();
 			window.draw(cargarFondoTablero);
 			window.draw(titulo);
-			mostrarMatriz(window);
 			window.display();
-			
 		}
-		
 
 	}
-	
 }

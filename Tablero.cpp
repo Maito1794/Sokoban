@@ -3,12 +3,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "Tablero.h"
 
 using namespace std;
 
-void Tablero::leerArchivo(string archivo) {
+void Tablero::leerArchivo() {
 
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
@@ -16,7 +15,7 @@ void Tablero::leerArchivo(string archivo) {
 
 	int cont = 0;
 	ifstream inFile;
-	inFile.open(archivo);
+	inFile.open("nivel1.txt");
 
 	if (!inFile) {
 		cout << "Ocurrio un error abriendo el archivo";
@@ -34,16 +33,16 @@ void Tablero::leerArchivo(string archivo) {
 	}
 
 
-	for (int i = 0; i < 100; i++) {
-		std::cout << cadena[i];
-	}
+	//for (int i = 0; i < 100; i++) {
+	//	std::cout << cadena[i];
+	//}
 
 	std::cout << "\n";
 }
 void Tablero::crearMatriz() {
 	
-	for (int i = 1; i < 10; i++) {
-		for (int j = 1; j < 10; j++) {
+	for (int i = 1; i < 11; i++) {
+		for (int j = 1; j < 11; j++) {
 			p = new struct nodo;
 			p->dato = cadena[cont];
 			p->sig = NULL;
@@ -108,14 +107,6 @@ void Tablero::mostrarMatriz() {
 
 }
 
-void Tablero::validaciones(nodo *n) {
-
-}
-
-void Tablero::jugar() {
-
-}
-
 Tablero::Tablero(float width, float height) {
 	fuente.loadFromFile("Letra_Pixel.ttf");
 	titulo.setFont(fuente);
@@ -125,7 +116,7 @@ Tablero::Tablero(float width, float height) {
 	titulo.setCharacterSize(60);
 }
 
-void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
+void Tablero::mostrarTablero(RenderWindow& window) {
 	bool cerrar = false;
 
 	while (!cerrar) {

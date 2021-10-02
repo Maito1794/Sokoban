@@ -10,6 +10,8 @@ private:
 	Text descripcion;
 	Text salir;
 	Font fuente;
+	Texture gif;
+	Sprite sprite;
 
 public: 
 	Credito(float width, float height);

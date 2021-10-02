@@ -27,6 +27,8 @@ private:
 	int cont = 0;
 	nodo* p, * q, * r;
 	FILE* archivo;
+	Text titulo;
+	Font fuente;
 	Texture fondoTablero;
 	Sprite cargarFondoTablero;
 	Image imagen;
@@ -35,6 +37,8 @@ public:
 	void leerArchivo();
 	void crearMatriz();
 	void mostrarMatriz();
+	Tablero(float width, float height);
+   void mostrarTablero(RenderWindow& window);
 
 
 };

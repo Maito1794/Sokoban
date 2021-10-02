@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
+using namespace std;
 
 struct nodo {
 	char dato;
@@ -23,7 +24,7 @@ private:
 	nodo* head = NULL;
 	char cadena[100];
 	int cont = 0;
-	nodo* p, * q, * r;
+	//nodo* p, * q, * r;
 	FILE* archivo;
 	Text titulo;
 	Font fuente;
@@ -39,5 +40,6 @@ public:
 	void mostrarTablero(RenderWindow& window, int nivel);
 	void validaciones(nodo *n);
 	void jugar();
+	void cargarNiveles(int nivel);
 
 };

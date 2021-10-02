@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void Tablero::leerArchivo() {
+void Tablero::leerArchivo(string archivo) {
 
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
@@ -15,7 +15,7 @@ void Tablero::leerArchivo() {
 
 	int cont = 0;
 	ifstream inFile;
-	inFile.open("nivel1.txt");
+	inFile.open(archivo);
 
 	if (!inFile) {
 		cout << "Ocurrio un error abriendo el archivo";
@@ -37,10 +37,12 @@ void Tablero::leerArchivo() {
 	//	std::cout << cadena[i];
 	//}
 
-	std::cout << "\n";
+	cout << "\n";
 }
 void Tablero::crearMatriz() {
-	
+	nodo *p = NULL, *q = NULL, *r = NULL;
+	cont = 0;
+
 	for (int i = 1; i < 11; i++) {
 		for (int j = 1; j < 11; j++) {
 			p = new struct nodo;
@@ -93,16 +95,16 @@ void Tablero::mostrarMatriz() {
 			q = p;
 			// se recorren columnas
 			while (q != NULL) {
-				std::cout << q->dato << "  ";
+				cout << q->dato << "  ";
 				q = q->sig;
 			}
-			std::cout << "\n";
+			cout << "\n";
 			p = p->abajo;
 
 		}
 	}
 	else {
-		std::cout << "lista vacia...\n";
+		cout << "lista vacia...\n";
 	}
 
 }
@@ -116,9 +118,50 @@ Tablero::Tablero(float width, float height) {
 	titulo.setCharacterSize(60);
 }
 
-void Tablero::mostrarTablero(RenderWindow& window) {
+void Tablero::cargarNiveles(int nivel) {
+	switch (nivel) {
+	case 1:
+		leerArchivo("resources/niveles/nivel1.txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero1.png");
+		break;
+
+	case 2:
+		leerArchivo("resources/niveles/nivel2.txt");
+		
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero2.png");
+		break;
+
+	case 3:
+		leerArchivo("resources/niveles/nivel3.txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero3.png");
+		break;
+
+	case 4:
+		leerArchivo("resources/niveles/nivel4.txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero4.png");
+		break;
+
+	case 5:
+		leerArchivo("resources/niveles/nivel5.txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
+		break;
+
+	default:
+		break;
+	}
+	crearMatriz();
+	
+
+	cargarFondoTablero.setTexture(fondoTablero);
+	cargarFondoTablero.setPosition(20, 20);
+}
+
+
+void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 
+	cargarNiveles(nivel);
+	mostrarMatriz();
 	while (!cerrar) {
 
 		sf::Event event;
@@ -139,6 +182,7 @@ void Tablero::mostrarTablero(RenderWindow& window) {
 				break;
 			}
 			window.clear();
+			window.draw(cargarFondoTablero);
 			window.draw(titulo);
 			window.display();
 		}

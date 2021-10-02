@@ -15,17 +15,18 @@ int main(){
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
 	Tablero tablero(window.getSize().x, window.getSize().y);
-	tablero.leerArchivo();
-	tablero.crearMatriz();
-	tablero.mostrarMatriz();
-
+	
+	
+	
 	while (window.isOpen()) {
 
 		menu.cargarMenu(window);
 
 		switch (menu.getbotonPresionado()) {
 		case 0:
-			tablero.mostrarTablero(window);
+			tablero.mostrarTablero(window,1);
+			cout << "a"<<endl;
+			
 			break;
 		case 1:
 			break;

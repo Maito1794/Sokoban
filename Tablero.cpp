@@ -15,7 +15,7 @@ void Tablero::leerArchivo() {
 
 	int cont = 0;
 	ifstream inFile;
-	inFile.open("ejemplo.txt");
+	inFile.open("nivel1.txt");
 
 	if (!inFile) {
 		cout << "Ocurrio un error abriendo el archivo";
@@ -33,16 +33,16 @@ void Tablero::leerArchivo() {
 	}
 
 
-	for (int i = 0; i < 100; i++) {
-		std::cout << cadena[i];
-	}
+	//for (int i = 0; i < 100; i++) {
+	//	std::cout << cadena[i];
+	//}
 
 	std::cout << "\n";
 }
 void Tablero::crearMatriz() {
 	
-	for (int i = 1; i < 10; i++) {
-		for (int j = 1; j < 10; j++) {
+	for (int i = 1; i < 11; i++) {
+		for (int j = 1; j < 11; j++) {
 			p = new struct nodo;
 			p->dato = cadena[cont];
 			p->sig = NULL;

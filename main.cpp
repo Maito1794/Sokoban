@@ -10,11 +10,11 @@ using namespace sf;
 
 int main(){
 
-	RenderWindow window(VideoMode(750, 500), "Sokoban",Style::Close);
+	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
 	
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
-	Tablero tablero;
+	Tablero tablero(window.getSize().x, window.getSize().y);
 	tablero.leerArchivo();
 	tablero.crearMatriz();
 	tablero.mostrarMatriz();
@@ -25,7 +25,7 @@ int main(){
 
 		switch (menu.getbotonPresionado()) {
 		case 0:
-
+			tablero.mostrarTablero(window);
 			break;
 		case 1:
 			break;

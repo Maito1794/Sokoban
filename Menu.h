@@ -8,6 +8,8 @@ private:
 	Event e;
 	Font fuente;
 	Text boton[4];
+	Texture caja_gris;
+	Sprite caja;
 	bool cerrar;
 	int botonSeleccionado;
 

@@ -48,7 +48,7 @@ public:
 	void mostrarMatriz(RenderWindow& window1);
 	Tablero(float width, float height);
 	void mostrarTablero(RenderWindow& window, int nivel);
-	void validaciones(nodo *n);
+	void validaciones(RenderWindow& window, string mov);
 	void jugar();
 	void cargarNiveles(int nivel);
 

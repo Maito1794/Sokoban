@@ -115,7 +115,7 @@ void Menu::cargarMenu(RenderWindow& window)
 					teclaAbajo();
 					break;
 
-				case Keyboard::Enter:
+				case sf::Keyboard::Enter:
 					cerrar = true;
 					break;
 				}

@@ -161,8 +161,8 @@ Tablero::Tablero(float width, float height) {
 	titulo.setFont(fuente);
 	titulo.setFillColor(Color::Blue);
 	titulo.setString("SOKOBAN");
-	titulo.setPosition(10, 0);
-	titulo.setCharacterSize(60);
+	titulo.setPosition(300, 0);
+	titulo.setCharacterSize(20);
 }
 
 void Tablero::cargarNiveles(int nivel) {
@@ -224,6 +224,23 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				case Keyboard::Enter:
 					cerrar = true;
 					break;
+				
+				case Keyboard::Up:
+					validaciones(window, "arri");
+					break;
+
+				case Keyboard::Down:
+					validaciones(window, "abajo");
+					break;
+				case Keyboard::Left:
+					validaciones(window, "izq");
+					break;
+				case Keyboard::Right:
+					validaciones(window, "dere");
+					break;
+
+
+
 				}
 				break;
 			case sf::Event::Closed:
@@ -243,3 +260,74 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	}
 	
 }
+
+void Tablero::validaciones(RenderWindow& window, string mov) {
+
+	cout << "dentro a validaciones";
+	nodo* p = NULL, * q = NULL, *aux = NULL; 
+	if (head != NULL) {
+		p = head;
+		// se recorre las filas
+		while (p != NULL) {
+			q = p;
+			// se recorren columnas
+			while (q != NULL) {
+
+				if (q->dato == 64) {
+					aux = q;
+					break;
+				}
+				else {
+					q = q->sig;
+				}
+
+			}
+			cout << "\n";
+
+			p = p->abajo;
+
+		}
+	}
+
+	if (mov =="izq") {
+		if (aux->ant->dato == 32) {
+			aux->ant->dato = aux->dato;
+			aux->dato = 32;
+		}
+		
+
+	}
+	if (mov == "dere") {
+		if (aux->sig->dato == 32) {
+			aux->sig->dato = aux->dato;
+			aux->dato = 32;
+		}
+
+
+	}
+
+	if (mov == "arri") {
+		if (aux->arriba->dato == 32) {
+			aux->arriba->dato = aux->dato;
+			aux->dato = 32;
+		}
+
+
+	}
+	if (mov == "abajo") {
+		if (aux->abajo->dato == 32) {
+			aux->abajo->dato = aux->dato;
+			aux->dato = 32;
+		}
+
+
+	}
+
+	
+
+	mostrarMatriz(window);
+	window.display();
+
+}
+
+

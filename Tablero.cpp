@@ -96,22 +96,57 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 		// se recorre las filas
 		while (p != NULL) {
 			q = p;
+			cout << "x:  "<< x <<"y "<< y ;
 			// se recorren columnas
 			while (q != NULL) {
 				cout << q->dato << "  ";
-				if (q->dato == 35) {
+				if (q->dato == 35) {// # paredes
 
+					pared.loadFromFile("resources/sprite/pared_cafe.png");
+					cargarPared.setTexture(pared);
+					cargarPared.setPosition(x, y);
+					window1.draw(cargarPared);
+					x += 64;
+				}
+				else if (q->dato == 36) {// $ punto dede estara la caja al iniciar el juego.
 					cajas.loadFromFile("resources/sprite/caja_roja.png");
 					cargarCajas.setTexture(cajas);
 					cargarCajas.setPosition(x, y);
 					window1.draw(cargarCajas);
 					x += 64;
-					//y += 46;
+
 				}
+				else if (q->dato == 33) {// ! punto donde se tendra colocar la caja.
+					puntoCaja.loadFromFile("resources/sprite/punto_rojo.png");
+					cargarPuntoCaja.setTexture(puntoCaja);
+					cargarPuntoCaja.setPosition(x, y);
+					window1.draw(cargarPuntoCaja);
+					x += 64;
+
+				}
+				else if (q->dato == 64) {// @ vichito
+					personaje.loadFromFile("resources/sprite/personaje.png");
+					cargarPersonaje.setTexture(personaje);
+					cargarPersonaje.setPosition(x, y);
+					window1.draw(cargarPersonaje);
+					x += 64;
+
+				}
+				else if (q->dato == 32) {// espacio en blanco
+
+					x += 64;
+
+				}
+
+
+
 				q = q->sig;
 			}
 			cout << "\n";
+			
 			p = p->abajo;
+			x = 25;
+			y += 64;
 
 		}
 	}

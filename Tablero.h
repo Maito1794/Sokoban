@@ -26,10 +26,20 @@ private:
 	FILE* archivo;
 	Text titulo;
 	Font fuente;
+
 	Texture fondoTablero;
+	Texture pared;
 	Texture cajas;
+	Texture personaje;
+	Texture puntoCaja;
+	Texture ubicacionCaja;
+
 	Sprite cargarFondoTablero;
+	Sprite cargarPared;
 	Sprite cargarCajas;
+	Sprite cargarPersonaje;
+	Sprite cargarPuntoCaja;
+	Sprite cargarUbicacionCaja;
 	Image imagen;
 
 public:

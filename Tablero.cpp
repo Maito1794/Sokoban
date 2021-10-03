@@ -108,7 +108,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					window1.draw(cargarPared);
 					x += 64;
 				}
-				else if (q->dato == 36) {// $ punto dede estara la caja al iniciar el juego.
+				else if (q->dato == 36 || q->dato == 33) {// $ punto dede estara la caja al iniciar el juego.
 					cajas.loadFromFile("resources/sprite/caja_roja.png");
 					cargarCajas.setTexture(cajas);
 					cargarCajas.setPosition(x, y);
@@ -116,7 +116,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					x += 64;
 
 				}
-				else if (q->dato == 33) {// ! punto donde se tendra colocar la caja.
+				else if (q->dato == 46 ) {// ! punto donde se tendra colocar la caja.
 					puntoCaja.loadFromFile("resources/sprite/punto_rojo.png");
 					cargarPuntoCaja.setTexture(puntoCaja);
 					cargarPuntoCaja.setPosition(x, y);
@@ -124,7 +124,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					x += 64;
 
 				}
-				else if (q->dato == 64) {// @ vichito
+				else if (q->dato == 64 || q->dato == 38) {// @ vichito
 					personaje.loadFromFile("resources/sprite/personaje.png");
 					cargarPersonaje.setTexture(personaje);
 					cargarPersonaje.setPosition(x, y);
@@ -239,8 +239,6 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 					validaciones(window, "dere");
 					break;
 
-
-
 				}
 				break;
 			case sf::Event::Closed:
@@ -264,7 +262,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 void Tablero::validaciones(RenderWindow& window, string mov) {
 
 	cout << "dentro a validaciones";
-	nodo* p = NULL, * q = NULL, *aux = NULL; 
+	nodo* p = NULL, * q = NULL, *aux = NULL, *relevo = NULL; 
 	if (head != NULL) {
 		p = head;
 		// se recorre las filas
@@ -273,7 +271,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 			// se recorren columnas
 			while (q != NULL) {
 
-				if (q->dato == 64) {
+				if (q->dato == 64 || q->dato == 38) {//@ &
 					aux = q;
 					break;
 				}
@@ -290,17 +288,111 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 	}
 
 	if (mov =="izq") {
-		if (aux->ant->dato == 32) {
-			aux->ant->dato = aux->dato;
+		if (aux->ant->dato == 32) { // valida si esta en blanco
+			aux->ant->dato = 64;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+		}
+		else if (aux->ant->dato == 46) {
+			aux->ant->dato = 38;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+
+		}
+
+		else if (aux->ant->dato == 36) { // valida si hay una caja
+			relevo = aux->ant;
+			if (relevo->ant->dato == 32 ) { // si al frende la caja esta en blanco
+				relevo->ant->dato = relevo->dato;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+				
+			}
+			else if (relevo->ant->dato == 46) { // // si al frende la caja es un punto
+				relevo->ant->dato = 33;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+
+		}
+		else if ( aux->ant->dato == 33) { // si es un signo de !
+			relevo = aux->ant;
+			relevo->ant->dato = 36;
+			relevo->dato = 38;
 			aux->dato = 32;
+
 		}
 		
-
 	}
+
 	if (mov == "dere") {
 		if (aux->sig->dato == 32) {
-			aux->sig->dato = aux->dato;
+			aux->sig->dato = 64;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+		}
+		else if (aux->sig->dato == 46) {
+			aux->sig->dato = 38;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+
+		}
+		else if (aux->sig->dato == 36) {
+			relevo = aux->sig;
+			if (relevo->sig->dato == 32) {
+				relevo->sig->dato = relevo->dato;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+			else if (relevo->sig->dato == 46) {
+				relevo->sig->dato = 33;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+
+		}
+		else if (aux->sig->dato == 33) {
+			relevo = aux->sig;
+			relevo->sig->dato = 36;
+			relevo->dato = 38;
 			aux->dato = 32;
+
 		}
 
 
@@ -308,16 +400,108 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 
 	if (mov == "arri") {
 		if (aux->arriba->dato == 32) {
-			aux->arriba->dato = aux->dato;
+			aux->arriba->dato = 64;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+		}
+		else if (aux->arriba->dato == 46) {
+			aux->arriba->dato = 38;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+
+		}
+		else if (aux->arriba->dato == 36) {
+			relevo = aux->arriba;
+			if (relevo->arriba->dato == 32) {
+				relevo->arriba->dato = relevo->dato;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+			else if (relevo->arriba->dato == 46) {
+				relevo->arriba->dato = 33;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+
+		}
+		else if (aux->arriba->dato == 33) {
+			relevo = aux->arriba;
+			relevo->arriba->dato = 36;
+			relevo->dato = 38;
 			aux->dato = 32;
+
 		}
 
 
 	}
 	if (mov == "abajo") {
 		if (aux->abajo->dato == 32) {
-			aux->abajo->dato = aux->dato;
+			aux->abajo->dato = 64;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+		}
+		else if (aux->abajo->dato == 46) {
+			aux->abajo->dato = 38;
+			if (aux->dato == 64) {
+				aux->dato = 32;
+			}
+			else {
+				aux->dato = 46;
+			}
+
+		}
+		else if (aux->abajo->dato == 36) {
+			relevo = aux->abajo;
+			if (relevo->abajo->dato == 32) {
+				relevo->abajo->dato = relevo->dato;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+			else if (relevo->abajo->dato == 46) {
+				relevo->abajo->dato = 33;
+				relevo->dato = 64;
+				if (aux->dato == 64) {
+					aux->dato = 32;
+				}
+				else {
+					aux->dato = 46;
+				}
+			}
+
+		}
+		else if (aux->abajo->dato == 33) {
+			relevo = aux->abajo;
+			relevo->abajo->dato = 36;
+			relevo->dato = 38;
 			aux->dato = 32;
+
 		}
 
 

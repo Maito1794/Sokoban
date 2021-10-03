@@ -8,7 +8,7 @@
 using namespace std;
 
 void Tablero::leerArchivo(string archivo) {
-
+	colocado = 0;
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
 	}
@@ -260,6 +260,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 }
 
 void Tablero::validaciones(RenderWindow& window, string mov) {
+	
 
 	cout << "dentro a validaciones";
 	nodo* p = NULL, * q = NULL, *aux = NULL, *relevo = NULL; 
@@ -311,6 +312,8 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if (aux->ant->dato == 36) { // valida si hay una caja
 			relevo = aux->ant;
 			if (relevo->ant->dato == 32 ) { // si al frende la caja esta en blanco
+				
+
 				relevo->ant->dato = relevo->dato;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -322,6 +325,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				
 			}
 			else if (relevo->ant->dato == 46) { // // si al frende la caja es un punto
+				colocado++;
 				relevo->ant->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -335,9 +339,13 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if ( aux->ant->dato == 33) { // si es un signo de !
 			relevo = aux->ant;
-			relevo->ant->dato = 36;
-			relevo->dato = 38;
-			aux->dato = 32;
+			if (relevo->ant->dato != 35) {
+				colocado--;
+				relevo->ant->dato = 36;
+				relevo->dato = 38;
+				aux->dato = 32;
+			}
+			
 
 		}
 		
@@ -376,6 +384,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->sig->dato == 46) {
+				colocado++;
 				relevo->sig->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -389,10 +398,12 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->sig->dato == 33) {
 			relevo = aux->sig;
-			relevo->sig->dato = 36;
-			relevo->dato = 38;
-			aux->dato = 32;
-
+			if (relevo->sig->dato != 35) {
+				colocado--;
+				relevo->sig->dato = 36;
+				relevo->dato = 38;
+				aux->dato = 32;
+			}
 		}
 
 
@@ -421,6 +432,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if (aux->arriba->dato == 36) {
 			relevo = aux->arriba;
 			if (relevo->arriba->dato == 32) {
+				
 				relevo->arriba->dato = relevo->dato;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -431,6 +443,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->arriba->dato == 46) {
+				colocado++;
 				relevo->arriba->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -444,10 +457,12 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->arriba->dato == 33) {
 			relevo = aux->arriba;
-			relevo->arriba->dato = 36;
-			relevo->dato = 38;
-			aux->dato = 32;
-
+			if (aux->arriba->dato != 35) {
+				colocado--;
+				relevo->arriba->dato = 36;
+				relevo->dato = 38;
+				aux->dato = 32;
+			}
 		}
 
 
@@ -485,6 +500,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->abajo->dato == 46) {
+				colocado++;
 				relevo->abajo->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -498,15 +514,25 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->abajo->dato == 33) {
 			relevo = aux->abajo;
-			relevo->abajo->dato = 36;
-			relevo->dato = 38;
-			aux->dato = 32;
-
+			if (relevo->abajo->dato != 35) {
+				colocado--;
+				relevo->abajo->dato = 36;
+				relevo->dato = 38;
+				aux->dato = 32;
+			}
 		}
 
 
 	}
 
+	if (colocado == 2) {
+		fuente.loadFromFile("Letra_Pixel.ttf");
+		Text gano;
+		gano.setString("GANASTE!!!!!!!!!!");
+		gano.setPosition(660, 330);
+		gano.setFont(fuente);
+		window.draw(gano);
+	}
 	
 
 	mostrarMatriz(window);

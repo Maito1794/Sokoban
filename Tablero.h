@@ -26,6 +26,7 @@ private:
 	FILE* archivo;
 	Text titulo;
 	Font fuente;
+	int	colocado;
 
 	Texture fondoTablero;
 	Texture pared;

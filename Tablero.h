@@ -25,6 +25,15 @@ private:
 	char cadena[100];
 	FILE* archivo;
 	Text titulo;
+	Text niv;
+	Text nombreJugador;
+	Text movimientos;
+	Text tiempo;
+
+	Time tiempoJuego;
+	string nombreJ;
+	string numNivel;
+	int cantidadMovimientos;
 	Font fuente;
 	int	colocado;
 
@@ -41,9 +50,10 @@ private:
 	Sprite cargarPersonaje;
 	Sprite cargarPuntoCaja;
 	Sprite cargarUbicacionCaja;
-	Image imagen;
 
 public:
+	string prueba;
+	Tablero();
 	void leerArchivo(string archivo);
 	void crearMatriz();
 	void mostrarMatriz(RenderWindow& window1);
@@ -52,5 +62,6 @@ public:
 	void validaciones(RenderWindow& window, string mov);
 	void jugar();
 	void cargarNiveles(int nivel);
-
+	void pantallaDatos(RenderWindow& window);
+	void pedirNombre();
 };

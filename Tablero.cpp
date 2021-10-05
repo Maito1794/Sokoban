@@ -111,7 +111,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 				}
 				else if (q->dato == 36 || q->dato == 33) {// $ punto dede estara la caja al iniciar el juego.
 					if (numNivel == "1") {
-						cajas.loadFromFile("resources/sprite/caja_roja.png");
+						cajas.loadFromFile("resources/sprite/caja_gris.png");
 					}
 					else if (numNivel == "2") {
 						cajas.loadFromFile("resources/sprite/caja_morada.png");
@@ -120,7 +120,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 						cajas.loadFromFile("resources/sprite/caja_azul.png");
 					}
 					else if (numNivel == "4") {
-						cajas.loadFromFile("resources/sprite/caja_gris.png");
+						cajas.loadFromFile("resources/sprite/caja_roja.png");
 					}
 					else if (numNivel == "5") {
 						cajas.loadFromFile("resources/sprite/caja_amarilla.png");
@@ -133,7 +133,22 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 
 				}
 				else if (q->dato == 46 ) {// ! punto donde se tendra colocar la caja.
-					puntoCaja.loadFromFile("resources/sprite/punto_rojo.png");
+					if (numNivel == "1") {
+						puntoCaja.loadFromFile("resources/sprite/punto_gris.png");
+					}
+					else if (numNivel == "2") {
+						puntoCaja.loadFromFile("resources/sprite/punto_morado.png");
+					}
+					else if (numNivel == "3") {
+						puntoCaja.loadFromFile("resources/sprite/punto_azul.png");
+					}
+					else if (numNivel == "4") {
+						puntoCaja.loadFromFile("resources/sprite/punto_rojo.png");
+					}
+					else if (numNivel == "5") {
+						puntoCaja.loadFromFile("resources/sprite/punto_amarillo.png");
+					}
+					puntoCaja.loadFromFile("");
 					cargarPuntoCaja.setTexture(puntoCaja);
 					cargarPuntoCaja.setPosition(x+16, y+16);
 					window1.draw(cargarPuntoCaja);
@@ -277,16 +292,9 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 
 	movimientos.setFont(fuente);
 	movimientos.setFillColor(Color::White);
-	movimientos.setString("Movimientos: " + cantidadMovimientos);
+	movimientos.setString("Movimientos: " + totalMovimientos);
 	movimientos.setPosition(695, 220);
 	movimientos.setCharacterSize(30);
-
-	//
-	//tiempo.setFont(fuente);
-	//tiempo.setFillColor(Color::White);
-	//tiempo.setString("Tiempo: " );
-	//tiempo.setPosition(695, 320);
-	//tiempo.setCharacterSize(30);
 
 
 	reinicioYsalir.setFont(fuente);
@@ -318,11 +326,7 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 	bool sig = false;
-	fuente.loadFromFile("Letra_Pixel.ttf");
-	Text gano;
-	gano.setString("GANASTE!!!!!!!!!!");
-	gano.setPosition(695, 420);
-	gano.setFont(fuente);
+	
 	cargarNiveles(nivel);
 
 	crearMatriz();
@@ -338,27 +342,23 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			case sf::Event::KeyReleased:
 				switch (event.key.code) {
 				
-				case Keyboard::Up:
-					cantidadMovimientos++;
+				case Keyboard::Up:					
 					validaciones(window, "arri");
 					movJugador.push_back("arri");
 					totalMovimientos++;
 					break;
 
 				case Keyboard::Down:
-					cantidadMovimientos++;
 					validaciones(window, "abajo");
 					movJugador.push_back("abajo");
 					totalMovimientos++;
 					break;
 				case Keyboard::Left:
-					cantidadMovimientos++;
 					validaciones(window, "izq");
 					movJugador.push_back("izq");
 					totalMovimientos++;
 					break;
 				case Keyboard::Right:
-					cantidadMovimientos++;
 					validaciones(window, "dere");
 					movJugador.push_back("dere");
 					totalMovimientos++;
@@ -382,30 +382,15 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			window.draw(titulo);
 			mostrarMatriz(window);
 			if (colocado.size()== nivel +1) {
+				fuente.loadFromFile("Letra_Pixel.ttf");
+				Text gano;
+				gano.setString("GANASTE!!!!!!!!!!");
+				gano.setPosition(695, 420);
+				gano.setFont(fuente);
 				window.draw(gano);
 				cerrar = true;
 				sig = true;
 			}
-			/*else if (colocado.size() == 3 && nivel == 2) {
-				window.draw(gano);
-				cerrar = true;
-				sig = true;
-			}
-			else if (colocado.size() == 4 && nivel == 3) {
-				window.draw(gano);
-				cerrar = true;
-				sig = true;
-			}
-			else if (colocado.size() == 5 && nivel == 4) {
-				window.draw(gano);
-				cerrar = true;
-				sig = true;
-			}
-			else if (colocado.size() == 6 && nivel == 5) {
-				window.draw(gano);
-				cerrar = true;
-				sig = true;
-			}*/
 			pantallaDatos(window);
 			window.display();
 

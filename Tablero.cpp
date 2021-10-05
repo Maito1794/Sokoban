@@ -110,7 +110,22 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					x += 64;
 				}
 				else if (q->dato == 36 || q->dato == 33) {// $ punto dede estara la caja al iniciar el juego.
-					cajas.loadFromFile("resources/sprite/caja_roja.png");
+					if (numNivel == "1") {
+						cajas.loadFromFile("resources/sprite/caja_roja.png");
+					}
+					else if (numNivel == "2") {
+						cajas.loadFromFile("resources/sprite/caja_morada.png");
+					}
+					else if (numNivel == "3") {
+						cajas.loadFromFile("resources/sprite/caja_azul.png");
+					}
+					else if (numNivel == "4") {
+						cajas.loadFromFile("resources/sprite/caja_gris.png");
+					}
+					else if (numNivel == "5") {
+						cajas.loadFromFile("resources/sprite/caja_amarilla.png");
+					}
+					
 					cargarCajas.setTexture(cajas);
 					cargarCajas.setPosition(x, y);
 					window1.draw(cargarCajas);
@@ -222,7 +237,6 @@ void Tablero::cargarNiveles(int nivel) {
 	}
 	
 	crearMatriz();
-	//mostrarMatriz();
 	cargarFondoTablero.setTexture(fondoTablero);
 	cargarFondoTablero.setPosition(20, 20);
 }
@@ -245,6 +259,7 @@ void Tablero::noGuardado(RenderWindow& window) {
 }
 
 void Tablero::pantallaDatos(RenderWindow& window) {
+	
 	fuente.loadFromFile("Letra_Pixel.ttf");
 
 	niv.setFont(fuente);
@@ -255,10 +270,35 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 
 
 	nombreJugador.setFont(fuente);
-	nombreJugador.setString("Jugador:");
+	nombreJugador.setFillColor(Color::White);
+	nombreJugador.setString("Jugador: "+ nombreJ);
+	nombreJugador.setPosition(695, 120);
+	nombreJugador.setCharacterSize(30);
+
+	movimientos.setFont(fuente);
+	movimientos.setFillColor(Color::White);
+	movimientos.setString("Movimientos: " + cantidadMovimientos);
+	movimientos.setPosition(695, 220);
+	movimientos.setCharacterSize(30);
+
+	//
+	//tiempo.setFont(fuente);
+	//tiempo.setFillColor(Color::White);
+	//tiempo.setString("Tiempo: " );
+	//tiempo.setPosition(695, 320);
+	//tiempo.setCharacterSize(30);
+
+
+	reinicioYsalir.setFont(fuente);
+	reinicioYsalir.setFillColor(Color::White);
+	reinicioYsalir.setString("Presiona R para reiniciar\n\n\nPresione ESC para salir");
+	reinicioYsalir.setPosition(695, 520);
+	reinicioYsalir.setCharacterSize(20);
 
 	window.draw(niv);
-
+	window.draw(nombreJugador);
+	window.draw(movimientos);
+	window.draw(reinicioYsalir);
 }
 void Tablero::repeticion(RenderWindow& window, int nivel) {
 	cargarNiveles(nivel);
@@ -278,6 +318,11 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 	bool sig = false;
+	fuente.loadFromFile("Letra_Pixel.ttf");
+	Text gano;
+	gano.setString("GANASTE!!!!!!!!!!");
+	gano.setPosition(695, 420);
+	gano.setFont(fuente);
 	cargarNiveles(nivel);
 
 	crearMatriz();
@@ -294,25 +339,30 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				switch (event.key.code) {
 				
 				case Keyboard::Up:
+					cantidadMovimientos++;
 					validaciones(window, "arri");
 					movJugador.push_back("arri");
 					totalMovimientos++;
 					break;
 
 				case Keyboard::Down:
+					cantidadMovimientos++;
 					validaciones(window, "abajo");
 					movJugador.push_back("abajo");
 					totalMovimientos++;
 					break;
 				case Keyboard::Left:
+					cantidadMovimientos++;
 					validaciones(window, "izq");
 					movJugador.push_back("izq");
 					totalMovimientos++;
 					break;
 				case Keyboard::Right:
+					cantidadMovimientos++;
 					validaciones(window, "dere");
 					movJugador.push_back("dere");
 					totalMovimientos++;
+					
 					break;
 				case Keyboard::R:
 					cargarNiveles(stoi(numNivel));
@@ -331,16 +381,31 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			window.draw(cargarFondoTablero);
 			window.draw(titulo);
 			mostrarMatriz(window);
-			if (colocado.size()==2) {
-				fuente.loadFromFile("Letra_Pixel.ttf");
-				Text gano;
-				gano.setString("GANASTE!!!!!!!!!!");
-				gano.setPosition(660, 330);
-				gano.setFont(fuente);
+			if (colocado.size()== nivel +1) {
 				window.draw(gano);
 				cerrar = true;
 				sig = true;
 			}
+			/*else if (colocado.size() == 3 && nivel == 2) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+			}
+			else if (colocado.size() == 4 && nivel == 3) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+			}
+			else if (colocado.size() == 5 && nivel == 4) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+			}
+			else if (colocado.size() == 6 && nivel == 5) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+			}*/
 			pantallaDatos(window);
 			window.display();
 
@@ -371,7 +436,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	}
 	if (sig) {
 		repeticion(window, nivel);
-		if (nivel + 1 <= 2) {
+		if (nivel + 1 <= 5) {
 			mostrarTablero(window, nivel + 1);
 		}
 		else {
@@ -384,8 +449,6 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 
 void Tablero::validaciones(RenderWindow& window, string mov) {
 	
-
-	cout << "dentro a validaciones";
 	nodo* p = NULL, * q = NULL, *aux = NULL, *relevo = NULL; 
 	if (head != NULL) {
 		p = head;

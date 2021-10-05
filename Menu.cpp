@@ -98,6 +98,7 @@ void Menu::teclaAbajo()
 
 void Menu::cargarMenu(RenderWindow& window)
 {
+
 	cerrar = false;
 	while (!cerrar) {
 		sf::Event event;

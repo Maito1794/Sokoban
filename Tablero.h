@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <stack>
 #include <vector>
 
@@ -31,10 +32,10 @@ private:
 	Text nombreJugador;
 	Text movimientos;
 	Text tiempo;
+	Text reinicioYsalir;
 	vector<string>movJugador;
 	int totalMovimientos = 0;
-
-	Time tiempoJuego;
+	Music musica;
 	string nombreJ;
 	string numNivel;
 	int cantidadMovimientos;
@@ -55,8 +56,8 @@ private:
 	Sprite cargarPuntoCaja;
 	Sprite cargarUbicacionCaja;
 
+
 public:
-	string prueba;
 	Tablero();
 	void leerArchivo(string archivo);
 	void crearMatriz();

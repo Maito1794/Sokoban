@@ -148,7 +148,6 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					else if (numNivel == "5") {
 						puntoCaja.loadFromFile("resources/sprite/punto_amarillo.png");
 					}
-					puntoCaja.loadFromFile("");
 					cargarPuntoCaja.setTexture(puntoCaja);
 					cargarPuntoCaja.setPosition(x+16, y+16);
 					window1.draw(cargarPuntoCaja);
@@ -292,7 +291,7 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 
 	movimientos.setFont(fuente);
 	movimientos.setFillColor(Color::White);
-	movimientos.setString("Movimientos: " + totalMovimientos);
+	movimientos.setString("Movimientos: "+ to_string(totalMovimientos));
 	movimientos.setPosition(695, 220);
 	movimientos.setCharacterSize(30);
 
@@ -310,9 +309,21 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 }
 void Tablero::repeticion(RenderWindow& window, int nivel) {
 	cargarNiveles(nivel);
+	sf::Event event;
 	for (int i = 0; i < movJugador.size(); i++) {
 		validaciones(window,movJugador[i]);
 		sleep(Time(milliseconds(300)));
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+
+			case sf::Event::KeyReleased:
+				switch (event.key.code) {
+				case Keyboard::Enter:
+					i = movJugador.size();
+					break;
+				}
+			}
+		}
 		window.clear();
 		window.draw(cargarFondoTablero);
 		window.draw(titulo);
@@ -320,13 +331,22 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 		pantallaDatos(window);
 		window.display();
 	}
+	totalMovimientos = 0;
 	movJugador.clear();
 }
+
+
 
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 	bool sig = false;
-	
+	Font fuente;
+	fuente.loadFromFile("Letra_Pixel.ttf");
+	Text gano;
+	gano.setString("GANASTE!!!!!!!!!!");
+	gano.setPosition(695, 420);
+	gano.setFont(fuente);
+
 	cargarNiveles(nivel);
 
 	crearMatriz();
@@ -366,9 +386,12 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 					break;
 				case Keyboard::R:
 					cargarNiveles(stoi(numNivel));
+					movJugador.clear();
 					break;
 				case Keyboard::Escape:
 					cerrar = true;;
+					break;
+				default:
 					break;
 				}
 				break;
@@ -376,25 +399,32 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				cerrar = true;
 				window.close();
 				break;
+			default:
+				break;
 			}
 			window.clear();
 			window.draw(cargarFondoTablero);
 			window.draw(titulo);
 			mostrarMatriz(window);
-			if (colocado.size()== nivel +1) {
-				fuente.loadFromFile("Letra_Pixel.ttf");
-				Text gano;
-				gano.setString("GANASTE!!!!!!!!!!");
-				gano.setPosition(695, 420);
-				gano.setFont(fuente);
+			if (nivel == 1 && colocado.size() == 2) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+				
+			}
+			else if ((nivel == 2 || nivel == 4) && colocado.size() == 3) {
 				window.draw(gano);
 				cerrar = true;
 				sig = true;
 			}
+			else if (nivel == 3 && colocado.size() == 4) {
+				window.draw(gano);
+				cerrar = true;
+				sig = true;
+			}
+			
 			pantallaDatos(window);
 			window.display();
-
-			
 		}
 		if (cerrar) {
 			nodo* p = NULL, * q = NULL;

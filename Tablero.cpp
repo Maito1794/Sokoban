@@ -8,7 +8,9 @@
 using namespace std;
 
 void Tablero::leerArchivo(string archivo) {
-	colocado = 0;
+	while (!colocado.empty()) {
+		colocado.pop();
+	}
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
 	}
@@ -31,11 +33,6 @@ void Tablero::leerArchivo(string archivo) {
 	for (int i = 0; i < texto.size(); i++) {
 		cadena[i] = texto.at(i);
 	}
-
-
-	//for (int i = 0; i < 100; i++) {
-	//	std::cout << cadena[i];
-	//}
 
 	cout << "\n";
 }
@@ -174,7 +171,6 @@ void Tablero::cargarNiveles(int nivel) {
 
 	case 2:
 		leerArchivo("resources/niveles/nivel2.txt");
-		
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero2.png");
 		break;
 
@@ -193,6 +189,10 @@ void Tablero::cargarNiveles(int nivel) {
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
 		break;
 
+	case 6:
+		leerArchivo("resources/niveles/partidaGuardada.txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
+		break;
 	default:
 		break;
 	}
@@ -250,15 +250,17 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			window.draw(cargarFondoTablero);
 			window.draw(titulo);
 			mostrarMatriz(window);
-			if (colocado == 2) {
+			if (colocado.size()==2) {
 				fuente.loadFromFile("Letra_Pixel.ttf");
 				Text gano;
 				gano.setString("GANASTE!!!!!!!!!!");
 				gano.setPosition(660, 330);
 				gano.setFont(fuente);
 				window.draw(gano);
+				cerrar = true;
 			}
 			window.display();
+
 			
 		}
 		
@@ -333,7 +335,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				
 			}
 			else if (relevo->ant->dato == 46) { // // si al frende la caja es un punto
-				colocado++;
+				colocado.push(1);
 				relevo->ant->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -348,7 +350,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if ( aux->ant->dato == 33) { // si es un signo de !
 			relevo = aux->ant;
 			if (relevo->ant->dato != 35) {
-				colocado--;
+				colocado.pop();
 				relevo->ant->dato = 36;
 				relevo->dato = 38;
 				aux->dato = 32;
@@ -392,7 +394,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->sig->dato == 46) {
-				colocado++;
+				colocado.push(1);
 				relevo->sig->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -407,7 +409,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if (aux->sig->dato == 33) {
 			relevo = aux->sig;
 			if (relevo->sig->dato != 35) {
-				colocado--;
+				colocado.pop();
 				relevo->sig->dato = 36;
 				relevo->dato = 38;
 				aux->dato = 32;
@@ -451,7 +453,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->arriba->dato == 46) {
-				colocado++;
+				colocado.push(1);
 				relevo->arriba->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -466,7 +468,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if (aux->arriba->dato == 33) {
 			relevo = aux->arriba;
 			if (relevo->arriba->dato != 35) {
-				colocado--;
+				colocado.pop();
 				relevo->arriba->dato = 36;
 				relevo->dato = 38;
 				aux->dato = 32;
@@ -508,7 +510,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 				}
 			}
 			else if (relevo->abajo->dato == 46) {
-				colocado++;
+				colocado.push(1);
 				relevo->abajo->dato = 33;
 				relevo->dato = 64;
 				if (aux->dato == 64) {
@@ -523,7 +525,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		else if (aux->abajo->dato == 33) {
 			relevo = aux->abajo;
 			if (relevo->abajo->dato != 35) {
-				colocado--;
+				colocado.pop();
 				relevo->abajo->dato = 36;
 				relevo->dato = 38;
 				aux->dato = 32;

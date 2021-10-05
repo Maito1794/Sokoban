@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include <stack>
 
 using namespace sf;
 using namespace std;
@@ -26,7 +27,7 @@ private:
 	FILE* archivo;
 	Text titulo;
 	Font fuente;
-	int	colocado;
+	stack<int> colocado;
 
 	Texture fondoTablero;
 	Texture pared;

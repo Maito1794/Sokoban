@@ -167,7 +167,9 @@ Tablero::Tablero(float width, float height) {
 }
 
 void Tablero::cargarNiveles(int nivel) {
-
+	ifstream dirNivel;
+	string linea,nNivel;
+	int cont = 0;
 	switch (nivel) {
 	case 1:
 		leerArchivo("resources/niveles/nivel1.txt");
@@ -204,8 +206,16 @@ void Tablero::cargarNiveles(int nivel) {
 		break;
 
 	case 6:
-		leerArchivo("resources/niveles/partidaGuardada.txt");
-		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
+		dirNivel.open("resources/niveles/partidaGuardada" + nombreJ + ".txt");
+		while (getline(dirNivel, linea)) {
+			if (cont == 10) {
+				nNivel = linea;
+			}
+			cont++;
+		}
+		leerArchivo("resources/niveles/partidaGuardada"+nombreJ+".txt");
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero"+nNivel+".png");
+		numNivel = nNivel;
 		break;
 	default:
 		break;
@@ -217,9 +227,21 @@ void Tablero::cargarNiveles(int nivel) {
 	cargarFondoTablero.setPosition(20, 20);
 }
 
-void Tablero::pedirNombre() {
-	cout << "BIENVENIDO (A) a Sokoban. Digite su nombre:" << endl;
-	cin >> nombreJ;
+void Tablero::setNombre(string nombre) {
+	nombreJ = nombre;
+}
+
+void Tablero::noGuardado(RenderWindow& window) {
+	fuente.loadFromFile("Letra_Pixel.ttf");
+	Text cargada;
+	cargada.setFont(fuente);
+	cargada.setString("No existe ninguna partida guardada");
+	cargada.setPosition(130,340);
+	cargada.setFillColor(Color::White);
+	cargada.setCharacterSize(40);
+	window.draw(cargada);
+	window.display();
+	sleep(Time(seconds(3)));
 }
 
 void Tablero::pantallaDatos(RenderWindow& window) {
@@ -238,11 +260,16 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 	window.draw(niv);
 
 }
-
+/*void repeticion(RenderWindow& window) {
+	for (int i = 0; i < movimientos; i++) {
+		validaciones(window,movJugador[i]);
+		sleep(Time(seconds(1)));
+	}
+}*/
 
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
-	
+	bool sig = false;
 	cargarNiveles(nivel);
 
 	crearMatriz();
@@ -257,24 +284,34 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 
 			case sf::Event::KeyReleased:
 				switch (event.key.code) {
-				case Keyboard::Enter:
-					cerrar = true;
-					break;
 				
 				case Keyboard::Up:
 					validaciones(window, "arri");
+					/*movJugador.add("arri");
+					movimientos++;*/
 					break;
 
 				case Keyboard::Down:
 					validaciones(window, "abajo");
+					/*movJugador.add("arri");
+					movimientos++;*/
 					break;
 				case Keyboard::Left:
 					validaciones(window, "izq");
+					/*movJugador.add("arri");
+					movimientos++;*/
 					break;
 				case Keyboard::Right:
 					validaciones(window, "dere");
+					/*movJugador.add("arri");
+					movimientos++;*/
 					break;
-
+				case Keyboard::R:
+					cargarNiveles(stoi(numNivel));
+					break;
+				case Keyboard::Escape:
+					cerrar = true;;
+					break;
 				}
 				break;
 			case sf::Event::Closed:
@@ -294,14 +331,44 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				gano.setFont(fuente);
 				window.draw(gano);
 				cerrar = true;
+				sig = true;
 			}
 			pantallaDatos(window);
 			window.display();
 
 			
 		}
-		
+		if (cerrar) {
+			nodo* p = NULL, * q = NULL;
+			ofstream partida;
+			partida.open("resources/niveles/partidaGuardada"+nombreJ+".txt");
+			if (head != NULL) {
+				p = head;
+				// se recorre las filas
+				while (p != NULL) {
+					q = p;
+					// se recorren columnas
+					while (q != NULL) {
+						partida << q->dato;
+						q = q->sig;
+					}
+					partida<< "\n";
 
+					p = p->abajo;
+
+				}
+				partida << numNivel;
+			}
+		}
+	}
+	if (sig) {
+		if (nivel + 1 <= 2) {
+			mostrarTablero(window, nivel + 1);
+		}
+		else {
+			cout << "Gano el juego";
+		}
+		
 	}
 	
 }

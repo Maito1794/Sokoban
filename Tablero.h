@@ -64,5 +64,6 @@ public:
 	void jugar();
 	void cargarNiveles(int nivel);
 	void pantallaDatos(RenderWindow& window);
-	void pedirNombre();
+	void setNombre(string nombre);
+	void noGuardado(RenderWindow& window);
 };

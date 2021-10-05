@@ -7,6 +7,10 @@
 
 using namespace std;
 
+Tablero::Tablero() {
+
+}
+
 void Tablero::leerArchivo(string archivo) {
 	while (!colocado.empty()) {
 		colocado.pop();
@@ -163,30 +167,40 @@ Tablero::Tablero(float width, float height) {
 }
 
 void Tablero::cargarNiveles(int nivel) {
+
 	switch (nivel) {
 	case 1:
 		leerArchivo("resources/niveles/nivel1.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero1.png");
+		numNivel = "1";
 		break;
 
 	case 2:
 		leerArchivo("resources/niveles/nivel2.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero2.png");
+		numNivel = "";
+		numNivel = "2";
 		break;
 
 	case 3:
 		leerArchivo("resources/niveles/nivel3.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero3.png");
+		numNivel = "";
+		numNivel = "3";
 		break;
 
 	case 4:
 		leerArchivo("resources/niveles/nivel4.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero4.png");
+		numNivel = "";
+		numNivel = "4";
 		break;
 
 	case 5:
 		leerArchivo("resources/niveles/nivel5.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
+		numNivel = "";
+		numNivel = "5";
 		break;
 
 	case 6:
@@ -203,17 +217,39 @@ void Tablero::cargarNiveles(int nivel) {
 	cargarFondoTablero.setPosition(20, 20);
 }
 
+void Tablero::pedirNombre() {
+	cout << "BIENVENIDO (A) a Sokoban. Digite su nombre:" << endl;
+	cin >> nombreJ;
+}
+
+void Tablero::pantallaDatos(RenderWindow& window) {
+	fuente.loadFromFile("Letra_Pixel.ttf");
+
+	niv.setFont(fuente);
+	niv.setString("Nivel " + numNivel);
+	niv.setPosition(770, 20);
+	niv.setFillColor(Color::White);
+	niv.setCharacterSize(40);
+
+
+	nombreJugador.setFont(fuente);
+	nombreJugador.setString("Jugador:");
+
+	window.draw(niv);
+
+}
+
 
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
-
+	
 	cargarNiveles(nivel);
 
 	crearMatriz();
 
 	
 	while (!cerrar) {
-
+		
 		sf::Event event;
 
 		while (window.pollEvent(event)) {
@@ -259,6 +295,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				window.draw(gano);
 				cerrar = true;
 			}
+			pantallaDatos(window);
 			window.display();
 
 			

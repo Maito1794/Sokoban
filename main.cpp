@@ -9,7 +9,9 @@ using namespace std;
 using namespace sf;
 
 int main(){
-
+	Tablero tableroNombre;
+	tableroNombre.pedirNombre();
+	 
 	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
 	
 	Menu menu(window.getSize().x, window.getSize().y);

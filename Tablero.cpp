@@ -90,7 +90,7 @@ void Tablero::crearMatriz() {
 void Tablero::mostrarMatriz(RenderWindow& window1) {
 	
 	nodo* p = NULL, * q = NULL;
-	int x = 25, y = 25; 
+	int x = 20, y = 20; 
 	if (head != NULL) {
 		p = head;
 		// se recorre las filas
@@ -119,7 +119,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 				else if (q->dato == 46 ) {// ! punto donde se tendra colocar la caja.
 					puntoCaja.loadFromFile("resources/sprite/punto_rojo.png");
 					cargarPuntoCaja.setTexture(puntoCaja);
-					cargarPuntoCaja.setPosition(x, y);
+					cargarPuntoCaja.setPosition(x+16, y+16);
 					window1.draw(cargarPuntoCaja);
 					x += 64;
 
@@ -127,7 +127,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 				else if (q->dato == 64 || q->dato == 38) {// @ vichito
 					personaje.loadFromFile("resources/sprite/personaje.png");
 					cargarPersonaje.setTexture(personaje);
-					cargarPersonaje.setPosition(x, y);
+					cargarPersonaje.setPosition(x+13, y+2);
 					window1.draw(cargarPersonaje);
 					x += 64;
 
@@ -145,7 +145,7 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 			cout << "\n";
 			
 			p = p->abajo;
-			x = 25;
+			x = 20;
 			y += 64;
 
 		}
@@ -250,6 +250,14 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			window.draw(cargarFondoTablero);
 			window.draw(titulo);
 			mostrarMatriz(window);
+			if (colocado == 2) {
+				fuente.loadFromFile("Letra_Pixel.ttf");
+				Text gano;
+				gano.setString("GANASTE!!!!!!!!!!");
+				gano.setPosition(660, 330);
+				gano.setFont(fuente);
+				window.draw(gano);
+			}
 			window.display();
 			
 		}
@@ -457,7 +465,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->arriba->dato == 33) {
 			relevo = aux->arriba;
-			if (aux->arriba->dato != 35) {
+			if (relevo->arriba->dato != 35) {
 				colocado--;
 				relevo->arriba->dato = 36;
 				relevo->dato = 38;
@@ -525,18 +533,6 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 
 	}
 
-	if (colocado == 2) {
-		fuente.loadFromFile("Letra_Pixel.ttf");
-		Text gano;
-		gano.setString("GANASTE!!!!!!!!!!");
-		gano.setPosition(660, 330);
-		gano.setFont(fuente);
-		window.draw(gano);
-	}
-	
-
-	mostrarMatriz(window);
-	window.display();
 
 }
 

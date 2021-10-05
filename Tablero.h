@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 #include <stack>
+#include <vector>
 
 using namespace sf;
 using namespace std;
@@ -30,6 +31,8 @@ private:
 	Text nombreJugador;
 	Text movimientos;
 	Text tiempo;
+	vector<string>movJugador;
+	int totalMovimientos = 0;
 
 	Time tiempoJuego;
 	string nombreJ;
@@ -66,4 +69,5 @@ public:
 	void pantallaDatos(RenderWindow& window);
 	void setNombre(string nombre);
 	void noGuardado(RenderWindow& window);
+	void repeticion(RenderWindow& window, int nivel);
 };

@@ -260,12 +260,20 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 	window.draw(niv);
 
 }
-/*void repeticion(RenderWindow& window) {
-	for (int i = 0; i < movimientos; i++) {
+void Tablero::repeticion(RenderWindow& window, int nivel) {
+	cargarNiveles(nivel);
+	for (int i = 0; i < movJugador.size(); i++) {
 		validaciones(window,movJugador[i]);
-		sleep(Time(seconds(1)));
+		sleep(Time(milliseconds(300)));
+		window.clear();
+		window.draw(cargarFondoTablero);
+		window.draw(titulo);
+		mostrarMatriz(window);
+		pantallaDatos(window);
+		window.display();
 	}
-}*/
+	movJugador.clear();
+}
 
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
@@ -287,24 +295,24 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				
 				case Keyboard::Up:
 					validaciones(window, "arri");
-					/*movJugador.add("arri");
-					movimientos++;*/
+					movJugador.push_back("arri");
+					totalMovimientos++;
 					break;
 
 				case Keyboard::Down:
 					validaciones(window, "abajo");
-					/*movJugador.add("arri");
-					movimientos++;*/
+					movJugador.push_back("abajo");
+					totalMovimientos++;
 					break;
 				case Keyboard::Left:
 					validaciones(window, "izq");
-					/*movJugador.add("arri");
-					movimientos++;*/
+					movJugador.push_back("izq");
+					totalMovimientos++;
 					break;
 				case Keyboard::Right:
 					validaciones(window, "dere");
-					/*movJugador.add("arri");
-					movimientos++;*/
+					movJugador.push_back("dere");
+					totalMovimientos++;
 					break;
 				case Keyboard::R:
 					cargarNiveles(stoi(numNivel));
@@ -362,6 +370,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 		}
 	}
 	if (sig) {
+		repeticion(window, nivel);
 		if (nivel + 1 <= 2) {
 			mostrarTablero(window, nivel + 1);
 		}

@@ -27,7 +27,7 @@ int main(){
 	char direccion[100];
 	strcpy_s(direccion, dir.c_str());
 	while (window.isOpen()) {
-
+		
 		reproducir(1);
 		menu.cargarMenu(window);		
 
@@ -41,6 +41,8 @@ int main(){
 		case 1:
 			partida.open("resources/niveles/partidaGuardada"+nombre+".txt");
 			if (!partida.fail()) {
+				musica->stop();
+				reproducir(2);
 				tablero.mostrarTablero(window, 6);
 			}
 			else {
@@ -54,7 +56,8 @@ int main(){
 		case 3:
 			window.close();
 			break;
-		}		
+		}	
+		musica->stop();
 	}
 
     return 0;

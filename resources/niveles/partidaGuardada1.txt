@@ -9,7 +9,7 @@
 ###  #  ##
 ##########
 5
-67
+72
 arri
 arri
 izq
@@ -18,11 +18,16 @@ abajo
 izq
 arri
 dere
-dere
-arri
-arri
 arri
 dere
+arri
+dere
+arri
+abajo
+izq
+arri
+dere
+arri
 arri
 arri
 izq

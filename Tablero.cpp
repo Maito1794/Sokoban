@@ -314,8 +314,8 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 	gano.setFont(fuente);
 	sf::Event event;
 	for (int i = 0; i < movJugador.size(); i++) {
-		validaciones(window,movJugador[i]);
 		sleep(Time(milliseconds(200)));
+		validaciones(window,movJugador[i]);
 		while (window.pollEvent(event)) {
 			switch (event.type) {
 

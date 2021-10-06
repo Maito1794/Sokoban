@@ -1,0 +1,79 @@
+##########
+##    @!##
+##   # ###
+###  # ###
+### !# ###
+#!  ## ###
+#    #  ##
+#     ! ##
+###  #  ##
+##########
+5
+67
+arri
+arri
+izq
+izq
+abajo
+izq
+arri
+dere
+dere
+arri
+arri
+arri
+dere
+arri
+arri
+izq
+izq
+abajo
+dere
+arri
+dere
+abajo
+abajo
+arri
+arri
+dere
+dere
+abajo
+abajo
+abajo
+abajo
+abajo
+dere
+abajo
+abajo
+izq
+arri
+arri
+arri
+arri
+arri
+arri
+abajo
+abajo
+abajo
+abajo
+abajo
+izq
+izq
+arri
+izq
+izq
+abajo
+dere
+dere
+dere
+izq
+izq
+arri
+arri
+arri
+arri
+arri
+arri
+dere
+dere
+dere

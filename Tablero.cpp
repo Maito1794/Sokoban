@@ -189,15 +189,6 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 	
 }
 
-Tablero::Tablero(float width, float height) {
-	fuente.loadFromFile("Letra_Pixel.ttf");
-	titulo.setFont(fuente);
-	titulo.setFillColor(Color::Blue);
-	titulo.setString("SOKOBAN");
-	titulo.setPosition(300, 0);
-	titulo.setCharacterSize(20);
-}
-
 void Tablero::cargarNiveles(int nivel) {
 	ifstream dirNivel;
 	string linea;
@@ -304,7 +295,7 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 
 	reinicioYsalir.setFont(fuente);
 	reinicioYsalir.setFillColor(Color::White);
-	reinicioYsalir.setString("Presiona R para reiniciar\n\n\nPresione ESC para salir");
+	reinicioYsalir.setString("Presione R para reiniciar\n\n\nPresione ESC para salir");
 	reinicioYsalir.setPosition(695, 520);
 	reinicioYsalir.setCharacterSize(20);
 
@@ -315,10 +306,16 @@ void Tablero::pantallaDatos(RenderWindow& window) {
 }
 void Tablero::repeticion(RenderWindow& window, int nivel) {
 	cargarNiveles(nivel);
+	fuente.loadFromFile("Letra_Pixel.ttf");
+	Text gano;
+	gano.setFillColor(Color::Green);
+	gano.setString("¡Nivel Completado!");
+	gano.setPosition(670, 420);
+	gano.setFont(fuente);
 	sf::Event event;
 	for (int i = 0; i < movJugador.size(); i++) {
 		validaciones(window,movJugador[i]);
-		sleep(Time(milliseconds(300)));
+		sleep(Time(milliseconds(200)));
 		while (window.pollEvent(event)) {
 			switch (event.type) {
 
@@ -331,6 +328,7 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 			}
 		}
 		window.clear();
+		window.draw(gano);
 		window.draw(cargarFondoTablero);
 		mostrarMatriz(window);
 		pantallaDatos(window);
@@ -345,21 +343,24 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	bool cerrar = false;
 	bool sig = false;
-	Font fuente;
+	bool reproducir = false;
 	fuente.loadFromFile("Letra_Pixel.ttf");
-	Text gano;
-	gano.setString("GANASTE!!!!!!!!!!");
-	gano.setPosition(695, 420);
+	Text gano, repe;
+	gano.setString("¡Nivel Completado!");
+	gano.setFillColor(Color::Green);
+	gano.setPosition(670, 420);
 	gano.setFont(fuente);
-
+	repe.setFont(fuente);
+	repe.setString("Presione ENTER para continuar\n\nO ESPACIO para ver repeticion");
+	repe.setPosition(60, 300);
+	repe.setFillColor(Color::Blue);
+	repe.setStyle(1);
 	cargarNiveles(nivel);
 	crearMatriz();
 	nivel = stoi(numNivel);
-	
-	while (!cerrar) {
-		
-		sf::Event event;
+	sf::Event event;
 
+	while (!cerrar) {
 		while (window.pollEvent(event)) {
 			switch (event.type) {
 
@@ -388,12 +389,12 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 					totalMovimientos++;
 					
 					break;
-				case Keyboard::R:
+				case Keyboard::R: //reiniciar
 					cargarNiveles(stoi(numNivel));
 					movJugador.clear();
 					totalMovimientos = 0;
 					break;
-				case Keyboard::Escape:
+				case Keyboard::Escape://salir y guardar
 					cerrar = true;;
 					break;
 				default:
@@ -409,7 +410,6 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			}
 			window.clear();
 			window.draw(cargarFondoTablero);
-			//window.draw(titulo);
 			mostrarMatriz(window);
 			if (nivel == 1 && colocado.size() == 2) {
 				window.draw(gano);
@@ -434,7 +434,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 		if (cerrar) {
 			nodo* p = NULL, * q = NULL;
 			ofstream partida;
-			partida.open("resources/niveles/partidaGuardada"+nombreJ+".txt");
+			partida.open("resources/niveles/partidaGuardada"+ nombreJ +".txt");
 			if (head != NULL) {
 				p = head;
 				// se recorre las filas
@@ -461,12 +461,61 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 		}
 	}
 	if (sig) {
-		repeticion(window, nivel);
+		window.display();
+		window.draw(repe);
+		window.display();
+		while (!reproducir) {
+			while (window.pollEvent(event)) {
+				switch (event.type) {
+
+				case sf::Event::KeyReleased:
+					switch (event.key.code) {
+					case Keyboard::Space:
+						repeticion(window, nivel);
+						reproducir = true;
+						break;
+					case Keyboard::Enter:
+						reproducir = true;
+						break;
+					}
+				}
+			}
+		}
 		if (nivel + 1 <= 5) {
+			totalMovimientos = 0;
 			mostrarTablero(window, nivel + 1);
 		}
 		else {
-			cout << "Gano el juego";
+			window.display();
+			RectangleShape rectangle;
+			rectangle.setSize(Vector2f(600, 110));
+			rectangle.setOutlineColor(Color::White);
+			rectangle.setOutlineThickness(10);
+			rectangle.setFillColor(Color::Black);
+			rectangle.setPosition(40, 290);
+			window.draw(rectangle);
+			gano.setFillColor(Color::Yellow);
+			gano.setString("	  ¡Bien Hecho!\n\nHaz Completado el juego");
+			gano.setPosition(120,300);
+			window.draw(gano);
+			window.display();
+			reproducir = false;
+			while (!reproducir) {
+				while (window.pollEvent(event)) {
+					switch (event.type) {
+
+					case sf::Event::KeyReleased:
+						switch (event.key.code) {
+						case Keyboard::Escape:
+							reproducir = true;
+							break;
+						case Keyboard::Enter:
+							reproducir = true;
+							break;
+						}
+					}
+				}
+			}
 		}
 		
 	}
@@ -551,7 +600,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if ( aux->ant->dato == 33) { // si es un signo de !
 			relevo = aux->ant;
-			if (relevo->ant->dato != 35) {
+			if (relevo->ant->dato == 32 || relevo->ant->dato == 46) {
 				colocado.pop();
 				relevo->ant->dato = 36;
 				relevo->dato = 38;
@@ -610,7 +659,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->sig->dato == 33) {
 			relevo = aux->sig;
-			if (relevo->sig->dato != 35) {
+			if (relevo->sig->dato == 32 || relevo->sig->dato == 46) {
 				colocado.pop();
 				relevo->sig->dato = 36;
 				relevo->dato = 38;
@@ -669,7 +718,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->arriba->dato == 33) {
 			relevo = aux->arriba;
-			if (relevo->arriba->dato != 35) {
+			if (relevo->arriba->dato == 32 || relevo->arriba->dato == 46) {
 				colocado.pop();
 				relevo->arriba->dato = 36;
 				relevo->dato = 38;
@@ -726,7 +775,7 @@ void Tablero::validaciones(RenderWindow& window, string mov) {
 		}
 		else if (aux->abajo->dato == 33) {
 			relevo = aux->abajo;
-			if (relevo->abajo->dato != 35) {
+			if (relevo->abajo->dato == 32 || relevo->abajo->dato == 46) {
 				colocado.pop();
 				relevo->abajo->dato = 36;
 				relevo->dato = 38;

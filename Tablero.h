@@ -62,10 +62,8 @@ public:
 	void leerArchivo(string archivo);
 	void crearMatriz();
 	void mostrarMatriz(RenderWindow& window1);
-	Tablero(float width, float height);
 	void mostrarTablero(RenderWindow& window, int nivel);
 	void validaciones(RenderWindow& window, string mov);
-	void jugar();
 	void cargarNiveles(int nivel);
 	void pantallaDatos(RenderWindow& window);
 	void setNombre(string nombre);

@@ -6,6 +6,7 @@
 #include "main.h"
 #include <cstdio>
 #include <cstdlib>
+#include <Windows.h>
 
 using namespace std;
 using namespace sf;
@@ -27,6 +28,7 @@ void main(){
 	string dir = "resources/niveles/partidaGuardada" + nombre + ".txt";
 	char direccion[100];
 	strcpy_s(direccion, dir.c_str());
+	FreeConsole();
 	while (window.isOpen()) {
 		
 		reproducir(1);

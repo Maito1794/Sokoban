@@ -21,7 +21,7 @@ int main(){
 	
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
-	Tablero tablero(window.getSize().x, window.getSize().y);
+	Tablero tablero;
 	tablero.setNombre(nombre);
 	ifstream partida;
 	string dir = "resources/niveles/partidaGuardada" + nombre + ".txt";

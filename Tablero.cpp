@@ -34,8 +34,7 @@ void Tablero::leerArchivo(string archivo) {
 	for (int i = 0; i < texto.size(); i++) {
 		cadena[i] = texto.at(i);
 	}
-
-	cout << "\n";
+	inFile.close();
 }
 void Tablero::crearMatriz() {
 	head = NULL;
@@ -458,6 +457,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 					partida << movJugador[i];
 				}
 			}
+			partida.close();
 		}
 	}
 	if (sig) {
@@ -483,6 +483,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 		}
 		if (nivel + 1 <= 5) {
 			totalMovimientos = 0;
+			movJugador.clear();
 			mostrarTablero(window, nivel + 1);
 		}
 		else {

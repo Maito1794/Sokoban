@@ -12,12 +12,13 @@ using namespace sf;
 Music* musica;
 void reproducir(int music);
 
-int main(){
+void main(){
 	string nombre;
-	cout << "BIENVENIDO (A) a Sokoban. Digite su nombre:" << endl;
+	cout <<endl<<"\t\t\t\t\tBIENVENIDO(A) a Sokoban. "
+		<<endl<<endl<<"\tDigite su nombre: ";
 	cin >> nombre;
 	
-	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
+	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Titlebar);
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
 	Tablero tablero;
@@ -54,13 +55,13 @@ int main(){
 			credito.mostrarCreditos(window);
 			break;
 		case 3:
+			musica->stop();
 			window.close();
 			break;
 		}	
 		musica->stop();
 	}
-
-    return 0;
+	musica->stop();
 }
 
 void reproducir(int music) {

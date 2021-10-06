@@ -1,84 +1,21 @@
 ##########
-##    @!##
-##   # ###
-###  # ###
-### !# ###
-#!  ## ###
-#    #  ##
-#     ! ##
-###  #  ##
+## . #####
+##    ####
+##    ####
+#### #####
+##  $  ###
+##   @!###
+##     ###
+####  ####
 ##########
-5
-72
-arri
-arri
-izq
-izq
-abajo
-izq
-arri
-dere
-arri
-dere
-arri
-dere
-arri
-abajo
-izq
-arri
-dere
-arri
-arri
-arri
-izq
+1
+9
 izq
 abajo
 dere
+abajo
+dere
 arri
-dere
-abajo
-abajo
-arri
-arri
-dere
-dere
-abajo
-abajo
-abajo
-abajo
-abajo
-dere
-abajo
-abajo
 izq
 arri
-arri
-arri
-arri
-arri
-arri
-abajo
-abajo
-abajo
-abajo
-abajo
-izq
-izq
-arri
-izq
-izq
-abajo
-dere
-dere
-dere
-izq
-izq
-arri
-arri
-arri
-arri
-arri
-arri
-dere
-dere
 dere

@@ -9,20 +9,20 @@ Credito::Credito(float width, float height) {
 	titulo.setFont(fuente);
 	titulo.setFillColor(Color::Blue);
 	titulo.setString("SOKOBAN");
-	titulo.setPosition(10, 0);
+	titulo.setPosition(400, 30);
 	titulo.setCharacterSize(60);
 
 
 	descripcion.setFont(fuente);
 	descripcion.setFillColor(Color::Blue);
 	descripcion.setString("Este juego fue elaborado por:");
-	descripcion.setPosition(10, 65);
+	descripcion.setPosition(235, 150);
 	descripcion.setCharacterSize(35);
 
 	responsables.setFont(fuente);
 	responsables.setFillColor(Color::White);
-	responsables.setString("Mauricio Mora Brenes\n\nHeizel Arias Alvarado\n\nJulián Ramírez Solís");
-	responsables.setPosition((width/2)-200, (height/2)-100);
+	responsables.setString("Mauricio Mora Brenes\n\n\nHeizel Arias Alvarado\n\n\nJulián Ramírez Solís");
+	responsables.setPosition((width/2)-200, (height/2)-80);
 	responsables.setCharacterSize(35);
 	
 	salir.setFont(fuente);

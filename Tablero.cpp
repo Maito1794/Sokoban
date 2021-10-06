@@ -92,7 +92,6 @@ void Tablero::crearMatriz() {
 }
 
 void Tablero::mostrarMatriz(RenderWindow& window1) {
-	
 	nodo* p = NULL, * q = NULL;
 	int x = 20, y = 20; 
 	if (head != NULL) {
@@ -103,8 +102,15 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 			// se recorren columnas
 			while (q != NULL) {
 				if (q->dato == 35) {// # paredes
-
-					pared.loadFromFile("resources/sprite/pared_cafe.png");
+					if (stoi(numNivel) == 1 || stoi(numNivel) == 2) {
+						pared.loadFromFile("resources/sprite/pared_cafe.png");
+					}
+					else if (stoi(numNivel) == 3 || stoi(numNivel) == 4) {
+						pared.loadFromFile("resources/sprite/pared_gris.png");
+					}
+					else if (stoi(numNivel) == 5) {
+						pared.loadFromFile("resources/sprite/pared_negra.png");
+					}
 					cargarPared.setTexture(pared);
 					cargarPared.setPosition(x, y);
 					window1.draw(cargarPared);

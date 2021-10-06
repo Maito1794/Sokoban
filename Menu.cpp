@@ -9,6 +9,7 @@ using namespace std;
 Menu::Menu(float width, float height) {
 
 	fuente.loadFromFile("Letra_Pixel.ttf");
+	
 
 	boton[0].setFont(fuente);
 	boton[0].setFillColor(Color::Green);

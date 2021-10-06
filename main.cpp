@@ -10,11 +10,13 @@
 using namespace std;
 using namespace sf;
 
+void reproducir(int music);
+
 int main(){
 	string nombre;
 	cout << "BIENVENIDO (A) a Sokoban. Digite su nombre:" << endl;
 	cin >> nombre;
-
+	Music *musica;
 	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
 	
 	Menu menu(window.getSize().x, window.getSize().y);
@@ -31,8 +33,17 @@ int main(){
 
 		switch (menu.getbotonPresionado()) {
 		case 0:
-			remove(direccion);
+			
 			tablero.mostrarTablero(window,1);
+			musica = new Music();
+			musica->openFromFile("resources/City-Lights.wav");
+			musica->setPosition(0, 1, 10);
+			musica->setPitch(1);
+			musica->setVolume(10);
+			musica->setLoop(true);
+			musica->play();
+			reproducir(1500);
+			remove(direccion);
 			break;
 		case 1:
 			partida.open("resources/niveles/partidaGuardada"+nombre+".txt");
@@ -54,4 +65,9 @@ int main(){
 	}
 
     return 0;
+}
+
+void reproducir(int music) {
+	Clock Timer;
+	while (Timer.getElapsedTime().asMilliseconds() < music);
 }

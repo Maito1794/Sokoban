@@ -18,7 +18,7 @@ void main(){
 	cout <<endl<<"\t\t\t\t\tBIENVENIDO(A) a Sokoban. "
 		<<endl<<endl<<"\tDigite su nombre: ";
 	cin >> nombre;
-	
+	cout << endl;
 	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Titlebar);
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);

@@ -12,9 +12,6 @@ Tablero::Tablero() {
 }
 
 void Tablero::leerArchivo(string archivo) {
-	while (!colocado.empty()) {
-		colocado.pop();
-	}
 	for (int i = 0; i < 100; i++) {
 		cadena[i] = NULL;
 	}
@@ -44,14 +41,19 @@ void Tablero::crearMatriz() {
 	head = NULL;
 	nodo *p = NULL, *q = NULL, *r = NULL;
 	int cont = 0;
-
+	while (!colocado.empty()) {
+		colocado.pop();
+	}
 	for (int i = 1; i < 11; i++) {
 		for (int j = 1; j < 11; j++) {
 			p = new struct nodo;
 			p->dato = cadena[cont];
 			p->sig = NULL;
 			p->abajo = NULL;
+			if (cadena[cont] == 33) {
 
+				colocado.push(1);
+			}
 			if (j == 1) {
 				p->ant = NULL;
 				if (head == NULL) {
@@ -75,6 +77,7 @@ void Tablero::crearMatriz() {
 				r = r->sig;
 
 			}
+			
 
 			cont++;
 
@@ -97,10 +100,8 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 		// se recorre las filas
 		while (p != NULL) {
 			q = p;
-			cout << "x:  "<< x <<"y "<< y ;
 			// se recorren columnas
 			while (q != NULL) {
-				cout << q->dato << "  ";
 				if (q->dato == 35) {// # paredes
 
 					pared.loadFromFile("resources/sprite/pared_cafe.png");
@@ -167,12 +168,8 @@ void Tablero::mostrarMatriz(RenderWindow& window1) {
 					x += 64;
 
 				}
-
-
-
 				q = q->sig;
 			}
-			cout << "\n";
 			
 			p = p->abajo;
 			x = 20;
@@ -197,7 +194,7 @@ Tablero::Tablero(float width, float height) {
 
 void Tablero::cargarNiveles(int nivel) {
 	ifstream dirNivel;
-	string linea,nNivel;
+	string linea;
 	int cont = 0;
 	switch (nivel) {
 	case 1:
@@ -209,42 +206,45 @@ void Tablero::cargarNiveles(int nivel) {
 	case 2:
 		leerArchivo("resources/niveles/nivel2.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero2.png");
-		numNivel = "";
 		numNivel = "2";
 		break;
 
 	case 3:
 		leerArchivo("resources/niveles/nivel3.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero3.png");
-		numNivel = "";
 		numNivel = "3";
 		break;
 
 	case 4:
 		leerArchivo("resources/niveles/nivel4.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero4.png");
-		numNivel = "";
 		numNivel = "4";
 		break;
 
 	case 5:
 		leerArchivo("resources/niveles/nivel5.txt");
 		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero5.png");
-		numNivel = "";
 		numNivel = "5";
 		break;
 
 	case 6:
 		dirNivel.open("resources/niveles/partidaGuardada" + nombreJ + ".txt");
+		movJugador.clear();
+		totalMovimientos = 0;
 		while (getline(dirNivel, linea)) {
 			if (cont == 10) {
-				nNivel = linea;
+				 numNivel = linea;
+			}
+			else if (cont == 11) {
+				totalMovimientos = stoi(linea);
+			}
+			else if (cont > 11) {
+				movJugador.push_back(linea);
 			}
 			cont++;
 		}
 		leerArchivo("resources/niveles/partidaGuardada"+nombreJ+".txt");
-		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero"+nNivel+".png");
-		numNivel = nNivel;
+		fondoTablero.loadFromFile("resources/fondo_tablero/fondo_tablero"+numNivel+".png");
 		break;
 	default:
 		break;
@@ -326,7 +326,6 @@ void Tablero::repeticion(RenderWindow& window, int nivel) {
 		}
 		window.clear();
 		window.draw(cargarFondoTablero);
-		window.draw(titulo);
 		mostrarMatriz(window);
 		pantallaDatos(window);
 		window.display();
@@ -348,9 +347,8 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 	gano.setFont(fuente);
 
 	cargarNiveles(nivel);
-
 	crearMatriz();
-
+	nivel = stoi(numNivel);
 	
 	while (!cerrar) {
 		
@@ -387,6 +385,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				case Keyboard::R:
 					cargarNiveles(stoi(numNivel));
 					movJugador.clear();
+					totalMovimientos = 0;
 					break;
 				case Keyboard::Escape:
 					cerrar = true;;
@@ -404,7 +403,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 			}
 			window.clear();
 			window.draw(cargarFondoTablero);
-			window.draw(titulo);
+			//window.draw(titulo);
 			mostrarMatriz(window);
 			if (nivel == 1 && colocado.size() == 2) {
 				window.draw(gano);
@@ -417,7 +416,7 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 				cerrar = true;
 				sig = true;
 			}
-			else if (nivel == 3 && colocado.size() == 4) {
+			else if ((nivel == 3 || nivel == 5) && colocado.size() == 4) {
 				window.draw(gano);
 				cerrar = true;
 				sig = true;
@@ -445,7 +444,13 @@ void Tablero::mostrarTablero(RenderWindow& window, int nivel) {
 					p = p->abajo;
 
 				}
-				partida << numNivel;
+				partida << numNivel;//guarda el nivel
+				partida << "\n";
+				partida << totalMovimientos;
+				for (int i = 0; i < movJugador.size(); i++) {//guarda movimientos
+					partida << "\n";
+					partida << movJugador[i];
+				}
 			}
 		}
 	}

@@ -1,11 +1,96 @@
 ##########
-## . #####
-##    ####
-##   $####
-###   ####
-##. $  ###
-##     ###
-##@ $  ###
-#### . ###
+##     !##
+##   # ###
+###  # ###
+### !# ###
+#!  ## ###
+#    #  ##
+#    @! ##
+###  #  ##
 ##########
-2
+5
+84
+dere
+arri
+arri
+izq
+izq
+abajo
+izq
+arri
+abajo
+dere
+dere
+dere
+dere
+dere
+dere
+izq
+arri
+arri
+arri
+arri
+dere
+arri
+arri
+izq
+izq
+abajo
+dere
+arri
+dere
+abajo
+abajo
+arri
+arri
+dere
+dere
+abajo
+abajo
+abajo
+abajo
+abajo
+dere
+abajo
+abajo
+izq
+arri
+arri
+arri
+arri
+arri
+arri
+abajo
+abajo
+abajo
+abajo
+abajo
+izq
+izq
+abajo
+izq
+arri
+izq
+arri
+arri
+dere
+arri
+arri
+arri
+arri
+dere
+dere
+dere
+izq
+izq
+izq
+abajo
+abajo
+abajo
+abajo
+abajo
+izq
+abajo
+dere
+dere
+dere

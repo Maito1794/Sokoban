@@ -9,16 +9,15 @@
 
 using namespace std;
 using namespace sf;
-
+Music* musica;
 void reproducir(int music);
 
 int main(){
 	string nombre;
 	cout << "BIENVENIDO (A) a Sokoban. Digite su nombre:" << endl;
 	cin >> nombre;
-	Music *musica;
-	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
 	
+	RenderWindow window(VideoMode(1020, 680), "Sokoban",Style::Close);
 	Menu menu(window.getSize().x, window.getSize().y);
 	Credito credito(window.getSize().x, window.getSize().y);
 	Tablero tablero;
@@ -29,21 +28,15 @@ int main(){
 	strcpy_s(direccion, dir.c_str());
 	while (window.isOpen()) {
 
-		menu.cargarMenu(window);
+		reproducir(1);
+		menu.cargarMenu(window);		
 
 		switch (menu.getbotonPresionado()) {
 		case 0:
-			
-			tablero.mostrarTablero(window,1);
-			musica = new Music();
-			musica->openFromFile("resources/City-Lights.wav");
-			musica->setPosition(0, 1, 10);
-			musica->setPitch(1);
-			musica->setVolume(10);
-			musica->setLoop(true);
-			musica->play();
-			reproducir(1500);
+			musica->stop();
+			reproducir(2);
 			remove(direccion);
+			tablero.mostrarTablero(window,1);
 			break;
 		case 1:
 			partida.open("resources/niveles/partidaGuardada"+nombre+".txt");
@@ -68,6 +61,16 @@ int main(){
 }
 
 void reproducir(int music) {
-	Clock Timer;
-	while (Timer.getElapsedTime().asMilliseconds() < music);
+	musica = new Music();
+	if (music == 1) {
+		musica->openFromFile("resources/menu.wav");
+	}
+	else {
+		musica->openFromFile("resources/partida.wav");
+	}
+
+	musica->setPitch(1);
+	musica->setVolume(20);
+	musica->setLoop(true);
+	musica->play();
 }
